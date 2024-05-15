@@ -41,3 +41,8 @@ function get_post_data($field)
 
      return;
 }
+
+function base_url($path = "")
+{
+     return "http://localhost/pw/pw2024_tubes_233040105" . $path;
+}

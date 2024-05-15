@@ -96,28 +96,68 @@ function index_admin()
      return $users;
 }
 
-function update_user_profile($email, $name, $img_profile_path)
+// Update profile user
+function update_user_profile($email, $name, $img_profile_path = null)
 {
-     global $conn; // Variabel koneksi database dari file db.php
+     global $conn;
 
      try {
-          // SQL statement untuk memasukkan data pengguna ke dalam tabel user_profiles
-          $stmt = $conn->prepare("INSERT INTO users (email, name, img_profile_path) VALUES (?, ?, ?)");
-          $stmt->bind_param("sss", $email, $name, $img_profile_path);
-
-          // Eksekusi statement SQL
+          if ($img_profile_path == null) {
+               $stmt = $conn->prepare("UPDATE users SET email = ?,  name= ? WHERE id = ?");
+               $stmt->bind_param("ssi", $email, $name, $_SESSION['user']['id']);
+          } else {
+               $stmt = $conn->prepare("UPDATE users SET email = ?,  name= ?, img_profile_path=? WHERE id = ?");
+               $stmt->bind_param("sssi", $email, $name, $img_profile_path, $_SESSION['user']['id']);
+          }
           $stmt->execute();
 
-          // Tutup statement
           $stmt->close();
+          $user = get_user($_SESSION['user']['id']);
+          $_SESSION['user'] = $user;
 
-          // Mengembalikan true jika proses insert berhasil
           return true;
      } catch (Exception $e) {
-          // Mengembalikan pesan error jika terjadi kesalahan
           return $e->getMessage();
      }
 }
+
+// Mendapatkan user berdasarkan id
+function get_user($id)
+{
+     global $conn;
+     $sql = mysqli_prepare($conn, "SELECT * FROM users WHERE id = ?");
+     mysqli_stmt_bind_param($sql, "i", $id);
+     mysqli_stmt_execute($sql);
+     $result = mysqli_stmt_get_result($sql);
+     $user = mysqli_fetch_assoc($result);
+     mysqli_stmt_close($sql);
+     return $user;
+}
+
+
+// Verifikasi password lama untuk melakukan ganti password
+function verify_old_password($user_id, $old_password)
+{
+     $user = get_user($user_id);
+
+     return password_verify($old_password, $user['password']);
+}
+
+// Melakukan pergantian password
+function update_user_password($user_id, $new_password)
+{
+     global $conn;
+
+     $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+
+
+     $sql = "UPDATE users SET password = ? WHERE id = ?";
+     $stmt = $conn->prepare($sql);
+     return $stmt->execute([$hashed_password, $user_id]);
+}
+
+
+
 
 // soft_destroy(2);
 // update(2, "Jhone", "jhone@example.com", "123123");
