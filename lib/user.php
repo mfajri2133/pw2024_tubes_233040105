@@ -37,9 +37,11 @@ function soft_destroy($id)
      global $conn;
      $sql = mysqli_prepare($conn, "UPDATE users SET is_active = 0 WHERE id = ?");
      mysqli_stmt_bind_param($sql, "i", $id);
-     mysqli_stmt_execute($sql);
+     $success = mysqli_stmt_execute($sql);
      mysqli_stmt_close($sql);
+     return $success;
 }
+
 
 function check_is_admin($id)
 {
@@ -68,10 +70,15 @@ function update($id, $name, $email, $password, $is_admin = 0, $is_active = 1)
      mysqli_stmt_close($sql);
 }
 
-function index()
+function getUsers($search = '')
 {
      global $conn;
+
+     $search = mysqli_real_escape_string($conn, $search);
      $sql = "SELECT * FROM users WHERE is_admin = 0 AND is_active = 1";
+     if (!empty($search)) {
+          $sql .= " AND name LIKE '%$search%'";
+     }
      $result = mysqli_query($conn, $sql);
      $users = [];
      if (mysqli_num_rows($result) > 0) {
@@ -81,6 +88,8 @@ function index()
      }
      return $users;
 }
+
+
 
 function index_admin()
 {

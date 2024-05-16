@@ -19,6 +19,7 @@ if (!login_check()) {
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title>Dashboard Admin | FWeb</title>
      <link rel="stylesheet" href="../css/output.css">
+     <link rel="stylesheet" href="../css/support.css">
 
 </head>
 
@@ -29,7 +30,7 @@ if (!login_check()) {
      <?php include_once "components/sidebar.php" ?>
 
 
-     <div class="p-4 ml-64 sm:ml-0 bg-gray-100 relative mt-14" style="min-height: calc(100vh - 3.5rem);">
+     <div class="p-4 ml-64 sm:ml-0 bg-gray-100 relative mt-[3.8rem]" style="min-height: calc(100vh - 4rem);">
 
           <?php include_once '../template/success_message.php'; ?>
           <?php include_once "components/bredcrumb.php" ?>

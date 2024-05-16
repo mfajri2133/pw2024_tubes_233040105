@@ -12,11 +12,16 @@ function handle_login()
           $result = login($email, $password);
 
           if (is_array($result)) {
-               $_SESSION['user_logged_in'] = true;
-               if ($result['is_admin'] == 1) {
-                    redirect_to("dashboard");
+               if ($result['is_active'] == 1) {
+                    $_SESSION['user_logged_in'] = true;
+                    if ($result['is_admin'] == 1) {
+                         redirect_to("dashboard");
+                    } else {
+                         redirect_to("index");
+                    }
                } else {
-                    redirect_to("index");
+                    $_SESSION['error'] = "Akun anda telah dinonaktifkan.";
+                    redirect_to("login");
                }
           } else {
                $_SESSION['error'] = "Email atau password salah";
@@ -26,6 +31,7 @@ function handle_login()
           redirect_to("login");
      }
 }
+
 
 // Pengecekan method yang digunakan
 switch ($_SERVER['REQUEST_METHOD']) {

@@ -17,9 +17,9 @@
                          <div class="px-5 py-3 hover:bg-gray-100">
                               <span class="sr-only">Open user menu</span>
                               <?php if (isset($_SESSION['user']['img_profile_path']) && !empty($_SESSION['user']['img_profile_path'])) : ?>
-                                   <img class="w-8 h-8 rounded-full object-cover" src="<?= base_url($_SESSION['user']['img_profile_path']) ?>" alt="user photo">
+                                   <img class="w-9 h-9 rounded-full object-cover" src="<?= base_url($_SESSION['user']['img_profile_path']) ?>" alt="user photo">
                               <?php else : ?>
-                                   <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="default user photo">
+                                   <img class="w-9 h-9 rounded-full object-cover" src="../uploads/user-2935527_1920.png" alt="Profile image">
                               <?php endif; ?>
                          </div>
                     </button>

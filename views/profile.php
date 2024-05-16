@@ -3,8 +3,8 @@
 
 
 <div class="grid grid-cols-2 sm:grid-cols-1">
-     <div class="flex items-center justify-center ">
-          <div class="bg-white shadow-md rounded-md p-8 max-w-md w-full sm:m-4">
+     <div class="flex items-center justify-center sm:mb-4 ">
+          <div class="bg-white shadow-md rounded-md p-8 max-w-md w-full ">
                <h4 class="font-bold mb-6 text-center ">Mengubah Informasi Akun</h4>
 
                <?php include_once '../template/error_message.php'; ?>
@@ -19,7 +19,7 @@
                          <input type="text" id="name" name="name" value="<?= $_SESSION['user']['name'] ?>" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     </div>
                     <div class="mb-4">
-                         <label class="block mb-2 text-sm font-medium text-gray-700 dark:text-white " for="img_profile_path">Foto Profile</label>
+                         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white " for="img_profile_path">Foto Profile</label>
                          <input id="img_profile_path" name="img_profile_path" type="file" accept=".png, .jpg, .jpeg" class="block w-full file:!text-xs file:!bg-blue-300 text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 " aria-describedby="file_input_help">
                          <p class="mt-1 text-xs text-red-600 dark:text-gray-300" id="file_input_help">JPEG, PNG or JPG (MAX 5MB).</p>
                     </div>
@@ -30,7 +30,7 @@
      </div>
 
      <div class="flex items-center justify-center">
-          <div class="bg-white shadow-md rounded-md p-8 max-w-md w-full sm:m-4">
+          <div class="bg-white shadow-md rounded-md p-8 max-w-md w-full ">
                <h4 class="font-bold mb-6 text-center">Mengubah Password</h4>
 
                <?php include_once '../template/error_message.php'; ?>
