@@ -40,7 +40,7 @@ $users = getUsers();
                                    <?php if (!empty($user['img_profile_path'])) : ?>
                                         <img class="w-10 h-10 rounded-full object-cover" src="<?= base_url($user['img_profile_path']) ?>" alt="Profile image">
                                    <?php else : ?>
-                                        <img class="w-10 h-10 rounded-full object-cover" src="../uploads/user-2935527_1920.png" alt="Profile image">
+                                        <img class="w-10 h-10 rounded-full object-cover" src="../uploads/default-user-picture.png" alt="Profile image">
                                    <?php endif; ?>
                                    <div class="ps-3">
                                         <div class="text-base "><?= htmlspecialchars($user['name']) ?></div>
