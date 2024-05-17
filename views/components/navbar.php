@@ -9,7 +9,7 @@
                          </svg>
                     </button>
                     <div class="flex ms-2 md:me-24">
-                         <a href="<?= base_url('/views/dashboard.php') ?>" class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">FWeb</a>
+                         <a href="<?= base_url('/views/dashboard.php') ?>" class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">FWeb Admin</a>
                     </div>
                </div>
                <div class="flex items-center">

@@ -1,9 +1,9 @@
+<?php include_once 'components/layout-top.php' ?>
 <?php include_once '../lib/user.php' ?>
 <?php
-$users = getUsers();
+$users = getAdmin();
 ?>
 
-<?php include_once 'components/layout-top.php' ?>
 <div id="overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-40"></div>
 <div class="bg-white shadow-md rounded-md p-8 w-full">
      <div class="flex items-center justify-end space-x-4 pb-4 bg-white dark:bg-gray-900">
@@ -14,7 +14,7 @@ $users = getUsers();
                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                     </svg>
                </div>
-               <input type="text" id="table-search-users" class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-72 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 sm:w-[294px]" placeholder="Search for user name or email">
+               <input type="text" id="table-search-users" class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-72 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 sm:w-[294px]" placeholder="Search for admin name or email">
           </div>
      </div>
 
@@ -50,19 +50,19 @@ $users = getUsers();
                                    <div class="font-normal text-gray-500"><?= htmlspecialchars($user['email']) ?></div>
                               </td>
                               <td class="px-4 py-3 text-center w-24">
-                                   <button type="button" data-modal-target="deleteUserModal<?= $user['id'] ?>" data-modal-show="deleteUserModal<?= $user['id'] ?>" class="bg-red-600 p-2 text-xs mx-1.5 rounded-full text-white">
+                                   <button type="button" data-modal-target="deleteUserModal<?= $user['id'] ?>" data-modal-show="deleteUserModal<?= $user['id'] ?>" class="bg-red-500 p-2 text-xs mx-1.5 rounded-full text-white">
                                         <i class="fa-solid fa-user-slash"></i>
                                    </button>
                               </td>
                          </tr>
 
-                         <div id="deleteUserModal<?= $user['id'] ?>" tabindex="-1" class="fixed inset-0 z-50 hidden flex items-center  justify-center w-full p-4 overflow-x-hidden overflow-y-auto ">
+                         <div id="deleteUserModal<?= $user['id'] ?>" tabindex="-1" class="fixed inset-0 z-50 hidden flex items-center justify-center w-full p-4 overflow-x-hidden overflow-y-auto">
                               <div class="relative w-full max-w-md max-h-full">
                                    <!-- Modal content -->
                                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                                         <!-- Modal header -->
                                         <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                                             <h3 class="text-xl font-medium text-gray-900 dark:text-white">Delete User</h3>
+                                             <h3 class="text-xl font-medium text-gray-900 dark:text-white">Delete admin</h3>
                                              <button type="button" class="close-modal text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="deleteUserModal<?= $user['id'] ?>">
                                                   <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
@@ -74,7 +74,7 @@ $users = getUsers();
                                         <form action="../controller/delete_user.php" method="POST">
                                              <input type="hidden" name="id" value="<?= $user['id'] ?>">
                                              <div class="p-4 md:p-5 space-y-4">
-                                                  <p class="text-gray-800 dark:text-white text-sm">Anda yakin ingin menghapus user <?= htmlspecialchars($user['name']) ?>?</p>
+                                                  <p class="text-gray-800 dark:text-white text-sm">Anda yakin ingin menghapus admin <?= htmlspecialchars($user['name']) ?>?</p>
                                              </div>
                                              <!-- Modal footer -->
                                              <div class="flex items-center justify-end p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
@@ -107,7 +107,7 @@ $users = getUsers();
                     <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
                </li>
                <li>
-                    <a href="#" aria-current="page" class="z-10 flex items-center justify-center px-3 h-8 leading-tight  border border-gray-300 bg-gray-100 hover:bg-gray-100  dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
+                    <a href="#" aria-current="page" class="z-10 flex items-center justify-center px-3 h-8 leading-tight  border border-gray-300 bg-gray-100 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
                </li>
                <li>
                     <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">4</a>
@@ -135,7 +135,7 @@ $users = getUsers();
           $('#table-search-users').on('input', function() {
                var search = $(this).val();
                $.ajax({
-                    url: '../controller/search_users.php',
+                    url: '../controller/search_admin.php',
                     type: 'GET',
                     data: {
                          search: search
@@ -161,7 +161,7 @@ $users = getUsers();
                             </button>
                         </td>
                     </tr>
-                    <div id="deleteUserModal${user.id}" tabindex="-1" class="fixed inset-0 z-50 hidden flex items-center justify-center w-full p-4 overflow-x-hidden overflow-y-auto modal">
+                    <div id="deleteUserModal${user.id}" tabindex="-1" class="fixed inset-0 z-50 hidden flex items-center justify-center w-full p-4 overflow-x-hidden overflow-y-auto">
                         <div class="relative w-full max-w-md max-h-full">
                             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                                 <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
@@ -191,14 +191,17 @@ $users = getUsers();
                });
           });
 
+          // Event delegation for opening modal
           $(document).on('click', '.delete-button', function() {
                var target = $(this).data('modal-target');
-               $('#' + target).removeClass('hidden').addClass('flex items-center justify-center modal');
+               $('#' + target).removeClass('hidden').addClass('flex items-center justify-center');
                $('#overlay').removeClass('hidden');
           });
 
+          // Event delegation for closing modal
           $(document).on('click', '.close-modal', function() {
                var target = $(this).data('modal-hide');
+               $('#' + target).addClass('hidden');
                $('#overlay').addClass('hidden');
           });
      });

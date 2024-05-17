@@ -33,4 +33,5 @@ if (!login_check()) {
      <div class="p-4 ml-64 sm:ml-0 bg-gray-100 relative mt-[3.8rem]" style="min-height: calc(100vh - 4rem);">
 
           <?php include_once '../template/success_message.php'; ?>
+          <?php include_once '../template/error_message.php'; ?>
           <?php include_once "components/bredcrumb.php" ?>
