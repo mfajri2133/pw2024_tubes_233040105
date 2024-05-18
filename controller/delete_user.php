@@ -11,21 +11,21 @@ function delete_user()
                $id = $_POST['id'];
                $result = soft_destroy($id);
                if ($result === true) {
-                    $_SESSION['success_message'] = "User berhasil dihapus.";
+                    $_SESSION['success_message'] = "User deleted successfully.";
                     redirect_to("user");
                     exit();
                } else {
-                    $_SESSION['error'] = "User tidak ditemukan.";
+                    $_SESSION['error'] = "User not found.";
                     redirect_to("user");
                     exit();
                }
           } else {
-               $_SESSION['error'] = "User tidak ditemukan.";
+               $_SESSION['error'] = "User not found.";
                redirect_to("user");
                exit();
           }
      } else {
-          $_SESSION['error'] = "Permintaan tidak valid.";
+          $_SESSION['error'] = "Invalid request.";
           redirect_to("user");
           exit();
      }

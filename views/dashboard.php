@@ -2,7 +2,7 @@
 
 
 <div class="bg-white shadow-md rounded-md p-8  w-full sm:m-4">
-     <h1>Selamat Datang Admin</h1>
+     <h1>Selamat Datang Admin <?= $_SESSION['user']['name']  ?></h1>
 </div>
 
 

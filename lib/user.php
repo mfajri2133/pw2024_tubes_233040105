@@ -32,6 +32,7 @@ function destroy($id)
      mysqli_stmt_close($sql);
 }
 
+// Mengapus dari list
 function soft_destroy($id)
 {
      global $conn;
@@ -70,6 +71,7 @@ function update($id, $name, $email, $password, $is_admin = 0, $is_active = 1)
      mysqli_stmt_close($sql);
 }
 
+// index user dengan search
 function getUsers($search = '')
 {
      global $conn;
@@ -99,7 +101,7 @@ function getUsers($search = '')
      return $users;
 }
 
-
+// Index admin dengan search
 function getAdmin($search = '')
 {
      global $conn;
@@ -154,6 +156,7 @@ function update_user_profile($email, $name, $img_profile_path = null)
      }
 }
 
+
 // Mendapatkan user berdasarkan id
 function get_user($id)
 {
@@ -166,6 +169,27 @@ function get_user($id)
      mysqli_stmt_close($sql);
      return $user;
 }
+
+// Menghapus gambar profil
+function remove_profile_image($user_id)
+{
+     global $conn;
+     try {
+          $stmt = $conn->prepare("UPDATE users SET img_profile_path = NULL WHERE id = ?");
+          $stmt->bind_param("i", $user_id);
+          $stmt->execute();
+          $stmt->close();
+
+          $user = get_user($user_id);
+          $_SESSION['user'] = $user;
+
+          return true;
+     } catch (Exception $e) {
+          return $e->getMessage();
+     }
+}
+
+
 
 
 // Verifikasi password lama untuk melakukan ganti password
@@ -193,5 +217,5 @@ function update_user_password($user_id, $new_password)
 
 
 // soft_destroy(2);
-// update(2, "Jhone", "jhone@example.com", "123123");
+// update(3, "Admin Sujono Ganteng", "jono@admin.com", "123123");
 // index_admin();

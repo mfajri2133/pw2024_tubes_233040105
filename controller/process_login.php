@@ -20,11 +20,11 @@ function handle_login()
                          redirect_to("index");
                     }
                } else {
-                    $_SESSION['error'] = "Akun anda telah dinonaktifkan.";
+                    $_SESSION['error'] = "Your account has been deactivated.";
                     redirect_to("login");
                }
           } else {
-               $_SESSION['error'] = "Email atau password salah";
+               $_SESSION['error'] = "Incorrect email or password.";
                redirect_to("login");
           }
      } else {

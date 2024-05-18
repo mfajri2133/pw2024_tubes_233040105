@@ -18,17 +18,17 @@ function update_profile()
                $result = update_user_profile($email, $name);
                if ($result === true) {
                     // Jika penyimpanan berhasil, lakukan tindakan selanjutnya
-                    $_SESSION['success_message'] = "Profil berhasil diperbarui.";
+                    $_SESSION['success_message'] = "Profile successfully changed.";
                     redirect_to("profile"); // Redirect ke halaman dashboard atau halaman lainnya
                     exit();
                } else {
-                    $_SESSION['error'] = "Email sudah digunakan.";
+                    $_SESSION['error'] = "Email is already in use.";
                     redirect_to("profile"); // Redirect kembali ke halaman pengeditan profil
                     exit();
                }
           }
      } else {
-          $_SESSION['error'] = "Permintaan tidak valid.";
+          $_SESSION['error'] = "Invalid request.";
           redirect_to("profile"); // Redirect kembali ke halaman pengeditan profil
           exit();
      }
@@ -69,21 +69,21 @@ function upload_img($email, $name)
                $result = update_user_profile($email, $name, $real_file_name);
                if ($result === true) {
                     // Jika penyimpanan berhasil, lakukan tindakan selanjutnya
-                    $_SESSION['success_message'] = "Profil berhasil diperbarui.";
+                    $_SESSION['success_message'] = "Profile successfully changed.";
                     redirect_to("profile");
                     exit();
                } else {
-                    $_SESSION['error'] = "Gagal menyimpan profil. Silakan coba lagi.";
+                    $_SESSION['error'] = "Failed to save profile. Please try again.";
                     redirect_to("profile");
                     exit();
                }
           } else {
-               $_SESSION['error'] = "Gagal mengunggah file. Silakan coba lagi.";
+               $_SESSION['error'] = "Failed to upload file. Please try again.";
                redirect_to("profile");
                exit();
           }
      } else {
-          $_SESSION['error'] = "Ukuran file terlalu besar.";
+          $_SESSION['error'] = "File size too large.";
           redirect_to("profile");
           exit();
      }
