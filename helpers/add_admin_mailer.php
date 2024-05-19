@@ -23,9 +23,13 @@ function send_email_notification($email, $name)
           $mail->Port = 465; // Your SMTP port
 
           // Set email parameters
+          // Menyiapkan email dan nama pengirim
           $mail->setFrom('applicationfweb@gmail.com', 'FWeb');
+          // Menyiapkan email dan nama penerima
           $mail->addAddress($email, $name);
+          // Menyiapkan subject email
           $mail->Subject = 'Admin Account Created';
+          // Menyiapkan isi email
           $mail->isHTML(true);
           $mail->Body =
                '<html><body style="font-family: Arial, sans-serif; color: #333; background-color: #f7f7f7; padding: 20px;">' .

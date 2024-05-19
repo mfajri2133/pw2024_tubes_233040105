@@ -3,6 +3,19 @@ include_once '../helpers/users.php';
 include_once '../lib/login.php';
 start_session();
 
+// Pengecekan method yang digunakan
+switch ($_SERVER['REQUEST_METHOD']) {
+          // Jika method yang digunakan adalah POST
+     case 'POST':
+          // Panggil fungsi handle_login
+          handle_login();
+          break;
+          // Jika method yang digunakan bukan POST
+     default:
+
+          redirect_to("login");
+          break;
+}
 
 function handle_login()
 {
@@ -30,15 +43,4 @@ function handle_login()
      } else {
           redirect_to("login");
      }
-}
-
-
-// Pengecekan method yang digunakan
-switch ($_SERVER['REQUEST_METHOD']) {
-     case 'POST':
-          handle_login();
-          break;
-     default:
-          redirect_to("login");
-          break;
 }

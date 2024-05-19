@@ -6,7 +6,7 @@ $current_page = basename($_SERVER['REQUEST_URI'], ".php");
      <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
           <ul class="space-y-2 font-medium">
                <li>
-                    <a href="#" class="flex items-center p-2  rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group <?php echo $current_page == 'movie_category' ? 'bg-gray-100  dark:bg-gray-700' : ''; ?>">
+                    <a href="<?= base_url('/views/category.php') ?>" class="flex items-center p-2  rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group <?php echo $current_page == 'category' ? 'bg-gray-100  dark:bg-gray-700' : ''; ?>">
                          <div class="w-5 h-5 content-center text-center">
                               <i class="fa-solid fa-film"></i>
                          </div>

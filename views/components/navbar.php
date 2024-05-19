@@ -19,7 +19,7 @@
                               <?php if (isset($_SESSION['user']['img_profile_path']) && !empty($_SESSION['user']['img_profile_path'])) : ?>
                                    <img class="w-9 h-9 rounded-full object-cover" src="<?= base_url($_SESSION['user']['img_profile_path']) ?>" alt="user photo">
                               <?php else : ?>
-                                   <img class="w-9 h-9 rounded-full object-cover" src="../uploads/default-user-picture.png" alt="Profile image">
+                                   <img class="w-9 h-9 rounded-full object-cover" src="../uploads/profile-pict/default-user-picture.png" alt="Profile image">
                               <?php endif; ?>
                          </div>
                     </button>

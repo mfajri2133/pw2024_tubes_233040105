@@ -16,7 +16,7 @@ fetch_post_data();
 <head>
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Login | FWeb</title>
+     <title>Sign in | FWeb</title>
      <link rel="stylesheet" href="../css/output.css">
 
 </head>
@@ -24,7 +24,7 @@ fetch_post_data();
 <body>
      <div class="bg-gray-100 flex items-center justify-center h-screen">
           <div class="bg-white shadow-md rounded-md p-8 max-w-md w-full sm:m-4">
-               <h2 class="text-2xl font-bold mb-6 text-center ">Login</h2>
+               <h2 class="text-2xl font-bold mb-6 text-center ">Sign in</h2>
 
                <?php include_once '../template/error_message.php'; ?>
 
@@ -47,15 +47,15 @@ fetch_post_data();
                          </div>
                     </div>
 
-                    <button type="submit" class="w-full text-white bg-blue-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Login</button>
+                    <button type="submit" class="w-full text-white bg-blue-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
 
                </form>
-               <p class="mt-4 text-sm text-gray-600 text-center">Don’t have an account yet? <a href="#" class="text-indigo-600 hover:text-indigo-500">Sign up</a></p>
+               <p class="mt-4 text-sm text-gray-600 text-center">Don’t have an account yet? <a href="register.php" class="text-indigo-600 hover:text-indigo-500">Sign up</a></p>
           </div>
      </div>
 </body>
 
-<script src="../js/password.js"></script>
+<script src="../js/password-toggle-hide.js"></script>
 <script src="../js/fontawesome-loader.js"></script>
 <script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
 

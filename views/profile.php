@@ -1,4 +1,6 @@
+<title>Profile | FWeb</title>
 <?php include_once 'components/layout-top.php' ?>
+
 
 
 <div class="bg-white shadow-md rounded-md p-8 w-full">
@@ -11,7 +13,7 @@
 
                <div class="border-2 rounded-md sm:border-none sm:rounded-none">
                     <div class="p-5 sm:p-0">
-                         <form action="../controller/change_profile.php" method="POST" enctype="multipart/form-data">
+                         <form action="../controller/profile.php?action=update" method="POST" enctype="multipart/form-data">
                               <div class="mb-4">
                                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
                                    <input type="email" id="email" name="email" required value="<?= $_SESSION['user']['email'] ?>" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -31,7 +33,7 @@
                               </div>
                          </form>
                          <?php if (isset($_SESSION['user']['img_profile_path']) && !empty($_SESSION['user']['img_profile_path'])) : ?>
-                              <form action="../controller/delete_profile_image.php" method="POST" class="mt-2">
+                              <form action="../controller/profile.php?action=delete_profile_img" method="POST" class="mt-2">
                                    <input type="hidden" name="id" value="<?= $_SESSION['user']['id'] ?>">
                                    <button type="submit" class=" w-full text-white bg-red-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Delete Profile Image</button>
                               </form>
@@ -51,7 +53,7 @@
 
                <div class="border-2 rounded-md sm:border-none sm:rounded-none">
                     <div class="p-5 sm:p-0">
-                         <form id="change-password-form" action="../controller/change_password.php" method="POST">
+                         <form id="change-password-form" action="../controller/profile.php?action=change_password" method="POST" onsubmit="return validateForm()">
                               <div class="mb-4">
                                    <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Current Password</label>
                                    <div class="relative w-full">
@@ -87,6 +89,7 @@
                                              </label>
                                         </div>
                                    </div>
+                                   <p id="error-message" class="text-xs text-red-600"></p>
                               </div>
 
                               <div class="flex justify-end mt-2 sm:mt-4 sm:grid sm:grid-cols-1">
@@ -101,7 +104,8 @@
 
 
 
-<script src="../js/password.js"></script>
+<script src="../js/password-toggle-hide.js"></script>
+<script src="../js/validate-form-change-pw.js"></script>
 
 
 <?php include_once 'components/layout-bottom.php' ?>

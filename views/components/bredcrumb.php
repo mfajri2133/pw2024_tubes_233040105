@@ -1,7 +1,7 @@
 <?php
 $current_page = basename($_SERVER['REQUEST_URI'], ".php");
 $page_names = [
-     'movie_category' => 'Movie Category',
+     'category' => 'Movie Category',
      'movies' => 'Movies',
      'user' => 'Users',
      'admin' => 'Admin',
