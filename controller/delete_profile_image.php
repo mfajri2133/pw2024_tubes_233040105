@@ -34,7 +34,7 @@ function delete_profile_image()
      } else {
           $_SESSION['error'] = "Invalid request.";
      }
-     header("Location: ../views/profile.php");
+     redirect_to("profile"); // Redirect kembali ke halaman pengeditan profil
      exit();
 }
 

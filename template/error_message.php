@@ -24,6 +24,13 @@ if ($error_message) :
                setTimeout(() => {
                     toast.classList.replace('bottom-[-50px]', 'bottom-5');
                }, 100);
+
+               setTimeout(() => {
+                    toast.classList.add('toast-hidden');
+                    setTimeout(() => {
+                         toast.remove();
+                    }, 600); // Mengatur waktu animasi
+               }, 4000); // Mengatur waktu toast menghilang
           });
      </script>
 <?php endif; ?>

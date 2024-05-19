@@ -12,14 +12,51 @@ function store($name, $email, $password, $is_admin = 0, $is_active = 1)
      mysqli_stmt_close($sql);
 }
 
-function store_admin($name, $email, $password, $is_admin = 1, $is_active = 1)
+
+function add_admin_user($name, $email)
 {
      global $conn;
-     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-     $sql = mysqli_prepare($conn, "INSERT INTO users (name, email, password, is_admin, is_active) VALUES (?, ?, ?, ?, ?)");
-     mysqli_stmt_bind_param($sql, "sssii", $name, $email, $hashed_password, $is_admin, $is_active);
-     mysqli_stmt_execute($sql);
-     mysqli_stmt_close($sql);
+
+     // Default password
+     $password = 'fwebAdmin123!';
+     // Hash password
+     $password_hash = password_hash($password, PASSWORD_DEFAULT);
+
+     // SQL untuk menambahkan user admin
+     $sql = "INSERT INTO users (name, email, password, is_admin, is_active) VALUES (?, ?, ?, 1, 1)";
+
+     if ($stmt = $conn->prepare($sql)) {
+          $stmt->bind_param("sss", $name, $email, $password_hash);
+          if ($stmt->execute()) {
+               $stmt->close();
+               return true;
+          } else {
+               $stmt->close();
+               return $stmt->error;
+          }
+     } else {
+          return $conn->error;
+     }
+}
+
+function is_email_exists($email)
+{
+     global $conn;
+
+     try {
+          $stmt = $conn->prepare("SELECT COUNT(*) FROM users WHERE email = ?");
+          $stmt->bind_param("s", $email);
+          $stmt->execute();
+          $stmt->bind_result($count);
+          $stmt->fetch();
+          $stmt->close();
+
+          // Jika jumlah baris dengan email yang cocok lebih dari 0, email sudah terdaftar
+          return $count > 0;
+     } catch (Exception $e) {
+          // Jika terjadi kesalahan, tangani di sini (misalnya, log kesalahan atau tampilkan pesan kesalahan)
+          return false;
+     }
 }
 
 
@@ -138,10 +175,10 @@ function update_user_profile($email, $name, $img_profile_path = null)
 
      try {
           if ($img_profile_path == null) {
-               $stmt = $conn->prepare("UPDATE users SET email = ?,  name= ? WHERE id = ?");
+               $stmt = $conn->prepare("UPDATE users SET email = ?, name= ? WHERE id = ?");
                $stmt->bind_param("ssi", $email, $name, $_SESSION['user']['id']);
           } else {
-               $stmt = $conn->prepare("UPDATE users SET email = ?,  name= ?, img_profile_path=? WHERE id = ?");
+               $stmt = $conn->prepare("UPDATE users SET email = ?, name= ?, img_profile_path=? WHERE id = ?");
                $stmt->bind_param("sssi", $email, $name, $img_profile_path, $_SESSION['user']['id']);
           }
           $stmt->execute();

@@ -29,7 +29,12 @@ $users = getAdmin();
                               Email
                          </th>
                          <th scope="col" class="px-4 py-3 text-center w-24 border-b ">
-                              Action
+                              <button type="button" data-modal-target="addAdminModal" data-modal-show="addAdminModal" class="bg-blue-600 p-2 text-xs mx-auto rounded-md text-white flex items-center">
+                                   <i class="fa-solid fa-user-plus me-1"></i>
+                                   <span>
+                                        Add
+                                   </span>
+                              </button>
                          </th>
                     </tr>
                </thead>
@@ -51,25 +56,26 @@ $users = getAdmin();
                               </td>
                               <td class="px-4 py-3 text-center w-24">
                                    <?php if ($user['id'] == $_SESSION['user']['id']) : ?>
-                                        <button type="button" class="bg-gray-300 p-2 text-xs mx-1.5 rounded-full text-gray-500 hidden">
+                                        <button type="button" data-modal-target="deleteAdminModal<?= $user['id'] ?>" data-modal-show="deleteAdminModal<?= $user['id'] ?>" class="bg-red-600 p-2 text-xs mx-1.5 rounded-full text-white hidden">
                                              <i class="fa-solid fa-user-slash"></i>
                                         </button>
                                    <?php else : ?>
-                                        <button type="button" data-modal-target="deleteUserModal<?= $user['id'] ?>" data-modal-show="deleteUserModal<?= $user['id'] ?>" class="bg-red-600 p-2 text-xs mx-1.5 rounded-full text-white">
+                                        <button type="button" data-modal-target="deleteAdminModal<?= $user['id'] ?>" data-modal-show="deleteAdminModal<?= $user['id'] ?>" class="bg-red-600 p-2 text-xs mx-1.5 rounded-full text-white">
                                              <i class="fa-solid fa-user-slash"></i>
                                         </button>
                                    <?php endif; ?>
                               </td>
                          </tr>
 
-                         <div id="deleteUserModal<?= $user['id'] ?>" tabindex="-1" class="fixed inset-0 z-50 hidden flex items-center justify-center w-full p-4 overflow-x-hidden overflow-y-auto">
+                         <!-- Modal Menghapus -->
+                         <div id="deleteAdminModal<?= $user['id'] ?>" tabindex="-1" class="fixed inset-0 z-50 hidden flex items-center justify-center w-full p-4 overflow-x-hidden overflow-y-auto">
                               <div class="relative w-full max-w-md max-h-full">
                                    <!-- Modal content -->
                                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                                         <!-- Modal header -->
                                         <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                                              <h3 class="text-xl font-medium text-gray-900 dark:text-white">Delete admin</h3>
-                                             <button type="button" class="close-modal text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="deleteUserModal<?= $user['id'] ?>">
+                                             <button type="button" class="close-modal text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="deleteAdminModal<?= $user['id'] ?>">
                                                   <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                                                   </svg>
@@ -90,10 +96,49 @@ $users = getAdmin();
                                    </div>
                               </div>
                          </div>
-
                     <?php endforeach; ?>
                </tbody>
           </table>
+     </div>
+
+     <!-- Modal Menambahkan -->
+     <div id="addAdminModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+          <div class="relative p-4 w-full max-w-md max-h-full">
+               <!-- Modal content -->
+               <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <!-- Modal header -->
+                    <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                         <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                              Add New Admin
+                         </h3>
+                         <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="addAdminModal">
+                              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                              </svg>
+                              <span class="sr-only">Close modal</span>
+                         </button>
+                    </div>
+                    <!-- Modal body -->
+                    <form method="POST" action="../controller/add_admin.php">
+                         <div class="p-5">
+                              <div class="mb-4">
+                                   <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama</label>
+                                   <input type="text" id="name" name="name" required class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                              </div>
+                              <div class="mb-4">
+                                   <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                                   <input type="email" id="email" name="email" required class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                              </div>
+
+                              <div class="flex justify-end">
+                                   <button type="submit" class="text-white items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                        Save
+                                   </button>
+                              </div>
+                         </div>
+                    </form>
+               </div>
+          </div>
      </div>
 
      <nav aria-label="Page navigation" class="pt-3">
@@ -166,17 +211,17 @@ $users = getAdmin();
                                         `<button type="button" class="bg-gray-300 p-2 text-xs mx-1.5 rounded-full text-gray-500 hidden">
                                              <i class="fa-solid fa-user-slash"></i>
                                         </button>` : 
-                                        `<button type="button" data-modal-target="deleteUserModal${user.id}" data-modal-show="deleteUserModal${user.id}" class="delete-button bg-red-600 p-2 text-xs mx-1.5 rounded-full text-white">
+                                        `<button type="button" data-modal-target="deleteAdminModal${user.id}" data-modal-show="deleteAdminModal${user.id}" class="delete-button bg-red-600 p-2 text-xs mx-1.5 rounded-full text-white">
                                              <i class="fa-solid fa-user-slash"></i>
                                         </button>`}
                                    </td>
                               </tr>
-                    <div id="deleteUserModal${user.id}" tabindex="-1" class="fixed inset-0 z-50 hidden flex items-center justify-center w-full p-4 overflow-x-hidden overflow-y-auto">
+                    <div id="deleteAdminModal${user.id}" tabindex="-1" class="fixed inset-0 z-50 hidden flex items-center justify-center w-full p-4 overflow-x-hidden overflow-y-auto">
                          <div class="relative w-full max-w-md max-h-full">
                               <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                                    <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                                         <h3 class="text-xl font-medium text-gray-900 dark:text-white">Delete User</h3>
-                                        <button type="button" class="close-modal text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="deleteUserModal${user.id}">
+                                        <button type="button" class="close-modal text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="deleteAdminModal${user.id}">
                                              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                              </svg>
