@@ -1,7 +1,7 @@
 <title>Admin | FWeb</title>
 <?php include_once 'components/layout-top.php' ?>
 
-<?php include_once '../lib/user.php' ?>
+<?php include_once '../lib/general.php' ?>
 <?php
 $users = fetchAdmin();
 ?>
@@ -154,7 +154,7 @@ $users = fetchAdmin();
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="../js/form-add-admin.js"></script>
+<script src="../js/modal.js"></script>
 <script>
      // Ajax search
      // Event listener untuk input pada form search

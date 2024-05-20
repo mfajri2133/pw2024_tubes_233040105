@@ -1,7 +1,8 @@
 <title>Movie Category | FWeb</title>
 <?php include_once 'components/layout-top.php' ?>
+<?php include_once '../lib/general.php' ?>
+<?php include_once '../lib/category.php' ?>
 
-<?php include_once '../lib/user.php' ?>
 <?php
 $categories = fetchCategories();
 ?>
@@ -16,7 +17,7 @@ $categories = fetchCategories();
                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                     </svg>
                </div>
-               <input type="text" id="table-search" class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-72 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 sm:w-[294px]" placeholder="Search for movie category name">
+               <input type="text" id="table-search" class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-72 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 sm:w-[294px]" placeholder="Search for movie category name" data-action="search">
           </div>
      </div>
 
@@ -52,7 +53,7 @@ $categories = fetchCategories();
                                              <div class="text-base "><?= htmlspecialchars($category['name']) ?></div>
                                         </div>
                                    </td>
-                                   <td class="px-4 py-3 text-center w-32 sm:flex sm:justify-center sm:items-center sm:space-x-2">
+                                   <td class="px-4 py-3 text-center w-32 sm:flex sm:justify-center sm:items-center sm:space-x-2 ">
                                         <button type="button" data-modal-target="editModal<?= $category['id'] ?>" data-modal-show="editModal<?= $category['id'] ?>" class="bg-green-600 rounded-full w-10 h-10 text-xs text-white">
                                              <i class="fa-solid fa-pen"></i>
                                         </button>
@@ -171,5 +172,8 @@ $categories = fetchCategories();
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="<?= base_url('/js/search-category-ajax.js') ?>"></script>
+<script src="<?= base_url('/js/modal.js') ?>"></script>
+
+
 
 <?php include_once 'components/layout-bottom.php' ?>

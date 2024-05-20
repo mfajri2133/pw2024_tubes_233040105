@@ -1,50 +1,48 @@
 <?php
 include_once '../helpers/users.php';
-include_once '../lib/user.php';
+include_once '../lib/general.php';
+include_once '../lib/category.php';
 start_session();
 
 // Pengecekan method yang digunakan
 switch ($_SERVER['REQUEST_METHOD']) {
-          // Jika method yang digunakan adalah POST
      case 'POST':
-          // mengecek action yang diambil
           $action = isset($_GET['action']) ? $_GET['action'] : '';
 
           switch ($action) {
-                    // Jika action yang diambil adalah create
                case 'create':
-                    // Panggil fungsi create_category
                     create_category();
                     break;
-                    // Jika action yang diambil adalah update
                case 'update':
-                    // Panggil fungsi update_category
                     update_category();
                     break;
-                    // Jika action yang diambil adalah delete
                case 'delete':
-                    // Panggil fungsi delete_category
                     delete_category();
                     break;
-                    // Jika action yang diambil tidak ditemukan
                default:
-                    // Redirect ke halaman category
                     redirect_to("category");
                     break;
           }
           break;
-          // Jika method yang digunakan adalah GET
      case 'GET':
-          // Panggil fungsi search_category
-          search_category();
+          $action = isset($_GET['action']) ? $_GET['action'] : '';
+
+          switch ($action) {
+               case 'search':
+                    search_category();
+                    break;
+               default:
+                    redirect_to("category");
+                    break;
+          }
           break;
-          // Jika method yang digunakan bukan POST atau GET
+
      default:
-          // Tampilkan pesan error
           $_SESSION['error'] = "Invalid request.";
           redirect_to("category");
           break;
 }
+
 
 function create_category()
 {

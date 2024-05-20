@@ -7,7 +7,7 @@ $(document).ready(function () {
           // Lakukan request ajax jika value tidak kosong
           $.ajax({
                // Menggunakan URL dari controller category.php
-               url: "../controller/category.php",
+               url: "../controller/category.php?action=search",
                // Menggunakan method GET
                type: "GET",
                // Dengan tipe data JSON (JavaScript Object Notation)
@@ -83,4 +83,27 @@ $(document).ready(function () {
           $("#" + target).addClass("hidden");
           $("#overlay").addClass("hidden");
      });
+});
+
+$(document).ready(function () {
+     // Ketika tombol close modal diklik
+     $(document).on("click", ".close-modal", function () {
+          // Ambil target modal yang akan ditutup
+          var target = $(this).data("modal-hide");
+          // Tutup modal dan overlay
+          $("#" + target).addClass("hidden");
+          $("#overlay").addClass("hidden");
+          // Reset formulir
+          resetForm($("#" + target));
+     });
+
+     // Fungsi untuk mereset formulir
+     function resetForm(modal) {
+          // Dapatkan semua elemen input dalam modal
+          var inputs = modal.find("input");
+          // Untuk setiap elemen input, set nilai defaultnya
+          inputs.each(function () {
+               $(this).val($(this).prop("defaultValue"));
+          });
+     }
 });

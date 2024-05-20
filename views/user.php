@@ -1,4 +1,4 @@
-<?php include_once '../lib/user.php' ?>
+<?php include_once '../lib/general.php' ?>
 <?php
 $users = fetchUsers();
 ?>
