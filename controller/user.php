@@ -1,6 +1,6 @@
 <?php
 include_once '../helpers/users.php';
-include_once '../lib/user.php';
+include_once "../lib/user.php";
 session_start();
 
 // Pengecekan method yang digunakan
@@ -20,6 +20,11 @@ switch ($_SERVER['REQUEST_METHOD']) {
                     redirect_to("user");
                     break;
           }
+          break;
+          // Jika method yang digunakan adalah GET
+     case 'GET':
+          // Panggil fungsi search_user
+          search_user();
           break;
           // Jika method yang digunakan bukan POST
      default:
@@ -52,4 +57,15 @@ function delete_user()
      }
      redirect_to("user");
      exit();
+}
+
+function search_user()
+{
+     // Jika ada data search yang dikirim
+     $search = isset($_GET['search']) ? $_GET['search'] : '';
+     // Panggil fungsi fetchUsers dan kirimkan data search
+     $users = fetchUsers($search);
+
+     header('Content-Type: application/json');
+     echo json_encode($users);
 }

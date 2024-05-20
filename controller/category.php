@@ -33,8 +33,14 @@ switch ($_SERVER['REQUEST_METHOD']) {
                     break;
           }
           break;
-          // Jika method yang digunakan bukan POST
+          // Jika method yang digunakan adalah GET
+     case 'GET':
+          // Panggil fungsi search_category
+          search_category();
+          break;
+          // Jika method yang digunakan bukan POST atau GET
      default:
+          // Tampilkan pesan error
           $_SESSION['error'] = "Invalid request.";
           redirect_to("category");
           break;
@@ -114,4 +120,13 @@ function delete_category()
      }
      redirect_to("category");
      exit();
+}
+
+function search_category()
+{
+     $search = isset($_GET['search']) ? $_GET['search'] : '';
+     $categories = fetchCategories($search);
+
+     header('Content-Type: application/json');
+     echo json_encode($categories);
 }

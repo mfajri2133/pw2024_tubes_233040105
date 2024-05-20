@@ -23,12 +23,18 @@ switch ($_SERVER['REQUEST_METHOD']) {
                     delete_admin();
                     break;
                default:
-                    redirect_to("category");
+                    redirect_to("admin");
                     break;
           }
           break;
-          // Jika method yang digunakan bukan POST
+          // Jika method yang digunakan adalah GET
+     case 'GET':
+          // Panggil fungsi search_admin
+          search_admin();
+          break;
+          // Jika method yang digunakan bukan POST atau GET
      default:
+          // Tampilkan pesan error
           $_SESSION['error'] = "Invalid request.";
           redirect_to("admin");
           break;
@@ -95,4 +101,14 @@ function delete_admin()
      }
      redirect_to("admin");
      exit();
+}
+
+function search_admin()
+{
+     $search = isset($_GET['search']) ? $_GET['search'] : '';
+     $users = fetchAdmin($search);
+
+     header('Content-Type: application/json');
+     echo json_encode($users);
+     exit;
 }

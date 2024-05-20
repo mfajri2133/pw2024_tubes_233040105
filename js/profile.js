@@ -1,4 +1,4 @@
-function validateForm() {
+function validateFormPassword() {
      var password = document.getElementById("new_password").value;
      var confirmPassword = document.getElementById("confirm_password").value;
      var errorMessage = "";

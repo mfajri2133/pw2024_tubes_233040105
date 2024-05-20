@@ -14,7 +14,7 @@ $current_page = basename($_SERVER['REQUEST_URI'], ".php");
                     </a>
                </li>
                <li>
-                    <a href="#" class="flex items-center p-2  rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group <?php echo $current_page == 'movies' ? 'bg-gray-100 dark:bg-gray-700 ' : ''; ?>">
+                    <a href="<?= base_url('/views/movie.php') ?>" class="flex items-center p-2  rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group <?php echo $current_page == 'movies' ? 'bg-gray-100 dark:bg-gray-700 ' : ''; ?>">
                          <div class="w-5 h-5 content-center text-center">
                               <i class="fa-regular fa-file-video"></i>
                          </div>
@@ -38,7 +38,7 @@ $current_page = basename($_SERVER['REQUEST_URI'], ".php");
                     </a>
                </li>
                <li>
-                    <a href="#" class="flex items-center p-2  rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group <?php echo $current_page == 'roles' ? 'bg-gray-100 dark:bg-gray-700' : ''; ?>">
+                    <a href="<?= base_url('/views/role.php') ?>" class="flex items-center p-2  rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group <?php echo $current_page == 'roles' ? 'bg-gray-100 dark:bg-gray-700' : ''; ?>">
                          <div class="w-5 h-5 content-center text-center">
                               <i class="fa-solid fa-user-gear"></i>
                          </div>

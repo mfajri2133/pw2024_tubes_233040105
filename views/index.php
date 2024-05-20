@@ -1,5 +1,5 @@
 <?php
-include_once '../helpers/users.php';
+include_once base_url('/helpers/users.php');
 start_session();
 
 
@@ -12,7 +12,7 @@ start_session();
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title>Index</title>
-     <link rel="stylesheet" href="../css/output.css">
+     <link rel="stylesheet" href="<?= base_url("/css/output.css") ?>">
 </head>
 
 <body class="bg-gray-100 flex items-center justify-center h-screen">
@@ -21,9 +21,9 @@ start_session();
           <h1>selamat datang dihalaman index</h1>
 
           <?php if (login_check()) : ?>
-               <a href="../lib/logout.php" class="w-full bg-red-500 text-black font-semibold py-2 px-4 rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600">Logout</a>
+               <a href="<?= base_url("/lib/logout.php") ?>" class="w-full bg-red-500 text-black font-semibold py-2 px-4 rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600">Logout</a>
           <?php else : ?>
-               <a href="../views/login.php" class="w-full bg-red-500 text-black font-semibold py-2 px-4 rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600">login</a>
+               <a href="<?= base_url("/views/login.php") ?>" class="w-full bg-red-500 text-black font-semibold py-2 px-4 rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600">login</a>
           <?php endif; ?>
 
      </div>

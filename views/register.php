@@ -1,5 +1,5 @@
 <?php
-include_once '../helpers/users.php';
+include_once base_url('/helpers/users.php');
 start_session();
 
 if (login_check()) {
@@ -15,7 +15,8 @@ if (login_check()) {
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title>Sign up | FWeb</title>
-     <link rel="stylesheet" href="../css/output.css">
+     <link rel="stylesheet" href="<?= base_url("/css/output.css") ?>">
+
 </head>
 
 <body>
@@ -23,8 +24,8 @@ if (login_check()) {
           <div class="bg-white shadow-md rounded-md p-8 max-w-md w-full sm:m-4">
                <h2 class="text-2xl font-bold mb-6 text-center ">Sign up</h2>
 
-               <?php include_once '../template/error_message.php'; ?>
-               <?php include_once '../template/success_message.php'; ?>
+               <?php include_once base_url("/template/error_message.php") ?>
+               <?php include_once base_url("/template/success_message.php") ?>
 
                <form action="../controller/process_register.php" method="POST" onsubmit="return validateForm()">
 
@@ -71,9 +72,9 @@ if (login_check()) {
 </body>
 
 
-<script src="../js/password-toggle-hide.js"></script>
-<script src="../js/validate-form-password.js"></script>
-<script src="../js/fontawesome-loader.js"></script>
-<script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
+<script src="<?= base_url("/js/password-toggle-hide.js") ?>"></script>
+<script src="<?= base_url("/js/validate-form-password.js") ?> "></script>
+<script src="<?= base_url("/js/fontawesome-loader.js") ?>"></script>
+<script src="<?= base_url("/node_modules/flowbite/dist/flowbite.min.js") ?>"></script>
 
 </html>

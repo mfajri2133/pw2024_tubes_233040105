@@ -9,7 +9,7 @@
                          </svg>
                     </button>
                     <div class="flex ms-2 md:me-24">
-                         <a href="<?= base_url('/views/dashboard.php') ?>" class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">FWeb Admin</a>
+                         <a href=<?= base_url('/views/dashboard.php') ?> class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">FWeb</a>
                     </div>
                </div>
                <div class="flex items-center">
@@ -17,9 +17,9 @@
                          <div class="px-5 py-3 hover:bg-gray-100">
                               <span class="sr-only">Open user menu</span>
                               <?php if (isset($_SESSION['user']['img_profile_path']) && !empty($_SESSION['user']['img_profile_path'])) : ?>
-                                   <img class="w-9 h-9 rounded-full object-cover" src="<?= base_url($_SESSION['user']['img_profile_path']) ?>" alt="user photo">
+                                   <img class="w-9 h-9 rounded-full object-cover" src=<?= base_url($_SESSION['user']['img_profile_path']) ?> alt="user photo">
                               <?php else : ?>
-                                   <img class="w-9 h-9 rounded-full object-cover" src="../uploads/profile-pict/default-user-picture.png" alt="Profile image">
+                                   <img class="w-9 h-9 rounded-full object-cover" src=<?= base_url("/uploads/profile-pict/default-user-picture.png") ?> alt="Profile image">
                               <?php endif; ?>
                          </div>
                     </button>
@@ -38,7 +38,7 @@
                                    <a href="profile.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Profile</a>
                               </li>
                               <li>
-                                   <a href="../lib/logout.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Log out</a>
+                                   <a href=<?= base_url("/lib/logout.php") ?> class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Log out</a>
                               </li>
                          </ul>
                     </div>

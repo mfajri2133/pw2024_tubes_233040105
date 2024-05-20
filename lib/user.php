@@ -54,6 +54,7 @@ function add_admin_user($name, $email)
      }
 }
 
+// Fungsi untuk menambahkan kategori
 function add_category($name)
 {
      global $conn;
@@ -261,20 +262,20 @@ function fetchCategories($search = '')
      // Mengamankan input pencarian
      $search = mysqli_real_escape_string($conn, $search);
 
-     // Query dasar untuk mendapatkan pengguna yang bukan admin dan aktif
+     // Dasar query untuk mengambil kategori
      $sql = "SELECT * FROM categories";
 
      // Menambahkan kondisi pencarian jika ada input pencarian
      if (!empty($search)) {
-          $sql .= " AND (name LIKE '%$search%' OR email LIKE '%$search%')";
+          $sql .= " WHERE name LIKE '%$search%'";
      }
 
      // Eksekusi query
      $result = mysqli_query($conn, $sql);
-     $categories = [];
 
      // Mengumpulkan hasil query
-     if (mysqli_num_rows($result) > 0) {
+     $categories = [];
+     if ($result && mysqli_num_rows($result) > 0) {
           while ($row = mysqli_fetch_assoc($result)) {
                $categories[] = $row;
           }
@@ -282,6 +283,8 @@ function fetchCategories($search = '')
 
      return $categories;
 }
+
+
 
 // Lib helper
 // Mendapatkan user berdasarkan id
