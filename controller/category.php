@@ -124,9 +124,13 @@ function delete_category()
 
 function search_category()
 {
+     // Jika ada data search yang dikirim
      $search = isset($_GET['search']) ? $_GET['search'] : '';
+     // Panggil fungsi fetchCategories dengan parameter search
      $categories = fetchCategories($search);
 
+     // Set header response
      header('Content-Type: application/json');
+     // Tampilkan data dalam format JSON
      echo json_encode($categories);
 }

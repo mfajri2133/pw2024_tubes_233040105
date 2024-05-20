@@ -66,6 +66,8 @@ function search_user()
      // Panggil fungsi fetchUsers dan kirimkan data search
      $users = fetchUsers($search);
 
+     // Jika data ditemukan
+     // Tampilkan data dalam format JSON
      header('Content-Type: application/json');
      echo json_encode($users);
 }
