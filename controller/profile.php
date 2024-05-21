@@ -1,6 +1,7 @@
 <?php
 include_once '../helpers/users.php';
 include_once '../lib/general.php';
+include_once '../lib/profile.php';
 session_start();
 
 
@@ -35,26 +36,26 @@ switch ($_SERVER['REQUEST_METHOD']) {
 // Fungsi untuk mengupdate profil pengguna
 function update_profile()
 {
-     // Jika data email dan nama dikirimkan melalui form
-     if (isset($_POST['email']) && isset($_POST['name'])) {
+     // Jika data username dan nama dikirimkan melalui form
+     if (isset($_POST['username']) && isset($_POST['name'])) {
           // Ambil data yang dikirimkan melalui form
-          $email = $_POST['email'];
-          $name = $_POST['name'];
+          $username = htmlspecialchars($_POST['username']);
+          $name = htmlspecialchars($_POST['name']);
 
           // Periksa apakah file foto profil diupload atau tidak
           if (isset($_FILES['img_profile_path']) && $_FILES['img_profile_path']['error'] === UPLOAD_ERR_OK) {
                // Jika file foto profil diupload, jalankan fungsi upload_img()
-               upload_img($email, $name);
+               upload_img($username, $name);
           } else {
                // Jika file foto profil tidak diupload, lanjutkan tanpa menyimpan path foto profil
-               $result = update_user_profile($email, $name);
+               $result = update_user_profile($username, $name);
                if ($result === true) {
                     // Jika penyimpanan berhasil, lakukan tindakan selanjutnya
                     $_SESSION['success_message'] = "Profile successfully changed.";
                     redirect_to("profile"); // Redirect ke halaman dashboard atau halaman lainnya
                     exit();
                } else {
-                    $_SESSION['error'] = "Email is already in use.";
+                    $_SESSION['error'] = "username is already in use.";
                     redirect_to("profile"); // Redirect kembali ke halaman pengeditan profil
                     exit();
                }
@@ -67,7 +68,7 @@ function update_profile()
 }
 
 // Fungsi untuk mengupload gambar profil
-function upload_img($email, $name)
+function upload_img($username, $name)
 {
      // Direktori penyimpanan file
      $upload_dir = "/uploads/profile-pict/" . $_SESSION['user']['id'] . '/';
@@ -100,7 +101,7 @@ function upload_img($email, $name)
           // Pindahkan file yang diupload ke direktori upload
           if (move_uploaded_file($_FILES["img_profile_path"]["tmp_name"], '..' . $real_file_name)) {
                // Panggil fungsi untuk menyimpan data ke database
-               $result = update_user_profile($email, $name, $real_file_name);
+               $result = update_user_profile($username, $name, $real_file_name);
                if ($result === true) {
                     // Jika penyimpanan berhasil, lakukan tindakan selanjutnya
                     $_SESSION['success_message'] = "Profile successfully changed.";
@@ -129,8 +130,8 @@ function change_password()
      // Jika data password lama, password baru, dan konfirmasi password dikirimkan melalui form
      if (isset($_POST['password']) && isset($_POST['new_password'])) {
           // Ambil data yang dikirimkan melalui form
-          $old_password = $_POST['password'];
-          $new_password = $_POST['new_password'];
+          $old_password = htmlspecialchars($_POST['password']);
+          $new_password = htmlspecialchars($_POST['new_password']);
 
           // Periksa apakah password lama benar
           $user_id = $_SESSION['user']['id'];

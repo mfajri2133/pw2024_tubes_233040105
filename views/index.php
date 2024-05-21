@@ -1,5 +1,5 @@
 <?php
-include_once base_url('/helpers/users.php');
+include_once '../helpers/users.php';
 start_session();
 
 

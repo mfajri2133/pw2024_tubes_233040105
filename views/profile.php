@@ -1,5 +1,4 @@
 <title>Profile | FWeb</title>
-<?php include_once 'lib/profile.php' ?>
 <?php include_once 'components/layout-top.php' ?>
 
 
@@ -16,8 +15,8 @@
                     <div class="p-5 sm:p-0">
                          <form action=<?= base_url("/controller/profile.php?action=update") ?> method="POST" enctype="multipart/form-data">
                               <div class="mb-4">
-                                   <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                                   <input type="email" id="email" name="email" required value="<?= $_SESSION['user']['email'] ?>" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                   <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
+                                   <input type="username" id="username" name="username" required value="<?= $_SESSION['user']['username'] ?>" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                               </div>
                               <div class="mb-4">
                                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama</label>

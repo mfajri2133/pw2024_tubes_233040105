@@ -48,7 +48,7 @@ function create_category()
 {
      // Jika ada data nama yang dikirim
      if (isset($_POST['name'])) {
-          $name = $_POST['name'];
+          $name = htmlspecialchars($_POST['name']);
           // Panggil fungsi add_category
           $result = add_category($name);
           // Jika hasilnya true
@@ -75,7 +75,7 @@ function update_category()
      if (isset($_POST['id']) && isset($_POST['name'])) {
           // Ambil data yang dikirimkan melalui form
           $id = $_POST['id'];
-          $name = $_POST['name'];
+          $name = htmlspecialchars($_POST['name']);
           // Panggil fungsi change_category
           $result = change_category($id, $name);
           // Jika hasilnya true

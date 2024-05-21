@@ -4,7 +4,7 @@ include_once 'connection.php';
 // Lib CRUD
 // Lib C (Create)
 // fungsi untuk register user dihalaman register
-function add_user($name, $email, $password)
+function add_user($name, $username, $password)
 {
      // Menggunakan variabel global $conn untuk konek ke database
      global $conn;
@@ -12,9 +12,9 @@ function add_user($name, $email, $password)
      // Hash password
      $hashed_password = password_hash($password, PASSWORD_DEFAULT);
      // Membuat query untuk menambahkan user
-     $stmt = $conn->prepare("INSERT INTO users (name, email, password, is_active, is_admin) VALUES (?, ?, ?, 1, 0)");
+     $stmt = $conn->prepare("INSERT INTO users (name, username, password, is_active, is_admin) VALUES (?, ?, ?, 1, 0)");
      // Mengikat parameter dan mengeksekusi query
-     $stmt->bind_param("sss", $name, $email, $hashed_password);
+     $stmt->bind_param("sss", $name, $username, $hashed_password);
      if ($stmt->execute()) {
           $stmt->close();
           return true;
@@ -89,22 +89,22 @@ function check_is_admin($id)
      return $is_admin == 1;
 }
 
-// fungsi untuk mencari email yang sudah terdaftar
-function is_email_exists($email)
+// fungsi untuk mencari username yang sudah terdaftar
+function is_username_exists($username)
 {
      // Menggunakan variabel global $conn untuk konek ke database
      global $conn;
 
-     // Mencari email yang cocok
+     // Mencari username yang cocok
      try {
-          $stmt = $conn->prepare("SELECT COUNT(*) FROM users WHERE email = ?");
-          $stmt->bind_param("s", $email);
+          $stmt = $conn->prepare("SELECT COUNT(*) FROM users WHERE username = ?");
+          $stmt->bind_param("s", $username);
           $stmt->execute();
           $stmt->bind_result($count);
           $stmt->fetch();
           $stmt->close();
 
-          // Jika jumlah baris dengan email yang cocok lebih dari 0, email sudah terdaftar
+          // Jika jumlah baris dengan username yang cocok lebih dari 0, username sudah terdaftar
           return $count > 0;
      } catch (Exception $e) {
           // Jika terjadi kesalahan, tangani di sini (misalnya, log kesalahan atau tampilkan pesan kesalahan)

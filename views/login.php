@@ -5,8 +5,6 @@ start_session();
 if (login_check()) {
      redirect_to("dashboard");
 }
-
-fetch_post_data();
 ?>
 
 
@@ -27,11 +25,12 @@ fetch_post_data();
                <h2 class="text-2xl font-bold mb-6 text-center ">Sign in</h2>
 
                <?php include_once '../template/error_message.php'; ?>
+               <?php include_once '../template/success_message.php'; ?>
 
-               <form action="<?= base_url("/controller/process_login.php") ?>" method="POST">
+               <form action="<?= base_url("/controller/auth.php?action=login") ?>" method="POST">
                     <div class="mb-4">
-                         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                         <input type="email" id="email" name="email" autocomplete="email" value="<?php echo get_post_data("email") ?>" required class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                         <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
+                         <input type="username" id="username" name="username" autocomplete="username" required class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     </div>
                     <div class="mb-4">
                          <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>

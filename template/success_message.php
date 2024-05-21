@@ -1,5 +1,5 @@
 <?php
-include_once '../controller/success_handler.php';
+include_once '../controller/toast_handler.php';
 $success_message = get_success_message();
 if ($success_message) :
 ?>

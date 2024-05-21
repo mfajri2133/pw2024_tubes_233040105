@@ -94,6 +94,7 @@ $categories = fetchCategories();
                               </div>
 
                               <!-- Modal edit -->
+                              <!-- Modal edit -->
                               <div id="editModal<?= $category['id'] ?>" tabindex="-1" class="modal fixed inset-0 z-50 hidden flex items-center justify-center w-full p-4 overflow-x-hidden overflow-y-auto">
                                    <div class="relative w-full max-w-md max-h-full">
                                         <!-- Modal content -->

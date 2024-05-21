@@ -1,5 +1,5 @@
 <?php
-include_once '../controller/error_handler.php';
+include_once '../controller/toast_handler.php';
 $error_message = get_error_message();
 if ($error_message) :
 ?>

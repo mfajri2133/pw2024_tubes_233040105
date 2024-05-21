@@ -1,5 +1,5 @@
 <?php
-include_once base_url('/helpers/users.php');
+include_once '../helpers/users.php';
 start_session();
 
 if (login_check()) {
@@ -24,18 +24,18 @@ if (login_check()) {
           <div class="bg-white shadow-md rounded-md p-8 max-w-md w-full sm:m-4">
                <h2 class="text-2xl font-bold mb-6 text-center ">Sign up</h2>
 
-               <?php include_once base_url("/template/error_message.php") ?>
-               <?php include_once base_url("/template/success_message.php") ?>
+               <?php include_once "../template/error_message.php" ?>
+               <?php include_once "../template/success_message.php" ?>
 
-               <form action="../controller/process_register.php" method="POST" onsubmit="return validateForm()">
+               <form action="../controller/auth.php?action=register" method="POST" onsubmit="return validateForm()">
 
                     <div class="mb-4">
                          <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
                          <input type="name" id="name" name="name" required class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     </div>
                     <div class="mb-4">
-                         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                         <input type="email" id="email" name="email" required class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                         <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
+                         <input type="username" id="username" name="username" required class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     </div>
                     <div class="mb-4">
                          <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>

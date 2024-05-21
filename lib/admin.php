@@ -15,7 +15,7 @@ function fetchAdmin($search = '')
 
      // Menambahkan kondisi pencarian jika ada input pencarian
      if (!empty($search)) {
-          $sql .= " AND (name LIKE '%$search%' OR email LIKE '%$search%')";
+          $sql .= " AND (name LIKE '%$search%' OR username LIKE '%$search%')";
      }
 
      // Eksekusi query
@@ -34,7 +34,7 @@ function fetchAdmin($search = '')
 
 
 // fungsi untuk menambahkan admin dari dashboard admin
-function add_admin($name, $email)
+function add_admin($name, $username)
 {
      // Menggunakan variabel global $conn untuk konek ke database
      global $conn;
@@ -45,12 +45,12 @@ function add_admin($name, $email)
      $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
      // SQL untuk menambahkan user admin
-     $sql = "INSERT INTO users (name, email, password, is_admin, is_active) VALUES (?, ?, ?, 1, 1)";
+     $sql = "INSERT INTO users (name, username, password, is_admin, is_active) VALUES (?, ?, ?, 1, 1)";
 
      // Mengeksekusi query
      if ($stmt = $conn->prepare($sql)) {
           // Mengikat parameter dan mengeksekusi query
-          $stmt->bind_param("sss", $name, $email, $password_hash);
+          $stmt->bind_param("sss", $name, $username, $password_hash);
           if ($stmt->execute()) {
                $stmt->close();
                return true;

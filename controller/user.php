@@ -25,7 +25,16 @@ switch ($_SERVER['REQUEST_METHOD']) {
           // Jika method yang digunakan adalah GET
      case 'GET':
           // Panggil fungsi search_user
-          search_user();
+          $action = isset($_GET['action']) ? $_GET['action'] : '';
+
+          switch ($action) {
+               case 'search':
+                    search_user();
+                    break;
+               default:
+                    redirect_to("user");
+                    break;
+          }
           break;
           // Jika method yang digunakan bukan POST
      default:

@@ -1,19 +1,20 @@
 <?php
 include_once 'connection.php';
-include_once '../controller/error_handler.php';
 
-function login($email, $password)
+include_once '../controller/toast_handler.php';
+
+function login($username, $password)
 {
      global $conn;
-     $sql = "SELECT * FROM users WHERE email = ?";
+     $sql = "SELECT * FROM users WHERE username = ?";
      $stmt = mysqli_prepare($conn, $sql);
-     mysqli_stmt_bind_param($stmt, "s", $email);
+     mysqli_stmt_bind_param($stmt, "s", $username);
      mysqli_stmt_execute($stmt);
      $result = mysqli_stmt_get_result($stmt);
      $user = mysqli_fetch_assoc($result);
 
      if (!$user || !password_verify($password, $user['password'])) {
-          set_error_message("Email atau password salah");
+          set_error_message("username atau password salah");
           $_SESSION['post_data'] = $_POST;
           return false;
      }
@@ -23,9 +24,9 @@ function login($email, $password)
 }
 
 
-$email = $_POST['email'];
-$password = $_POST['password'];
-$result = login($email, $password);
+// $username = $_POST['username'];
+// $password = $_POST['password'];
+// $result = login($email, $password);
 
 // function redirect_url($user)
 // {

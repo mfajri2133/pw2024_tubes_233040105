@@ -2,7 +2,8 @@
 include_once '../helpers/users.php';
 include_once '../lib/general.php';
 include_once '../lib/admin.php';
-include_once '../helpers/add_admin_mailer.php';
+include_once '../mailer/preparation_mailer.php';
+include_once '../mailer/add_admin_mailer.php';
 session_start();
 
 // Pengecekan method yang digunakan
@@ -30,8 +31,17 @@ switch ($_SERVER['REQUEST_METHOD']) {
           break;
           // Jika method yang digunakan adalah GET
      case 'GET':
+          $action = isset($_GET['action']) ? $_GET['action'] : '';
           // Panggil fungsi search_admin
-          search_admin();
+
+          switch ($action) {
+               case 'search':
+                    search_admin();
+                    break;
+               default:
+                    redirect_to("admin");
+                    break;
+          }
           break;
           // Jika method yang digunakan bukan POST atau GET
      default:
@@ -45,25 +55,42 @@ switch ($_SERVER['REQUEST_METHOD']) {
 function create_admin()
 {
      // Wadah untuk menyimpan data yang dikirimkan
-     if (isset($_POST['name']) && isset($_POST['email'])) {
-          $name = $_POST['name'];
-          $email = $_POST['email'];
+     if (isset($_POST['name']) && isset($_POST['username']) && isset($_POST['email'])) {
+          $name = htmlspecialchars($_POST['name']);
+          $email = htmlspecialchars($_POST['email']);
+          $username = htmlspecialchars($_POST['username']);
 
-          // Cek apakah email sudah terdaftar
-          if (is_email_exists($email)) {
-               $_SESSION['error'] = "This email is already registered.";
+          // Cek apakah username telah digunakan atau belum
+          if (is_username_exists($username)) {
+               $_SESSION['error'] = "This username is already registered.";
                redirect_to("admin");
                exit();
           }
 
           // Jika belum terdaftar panggil fungsi add_admin
-          $result = add_admin($name, $email);
+          $result = add_admin($name, $username);
           // Cek apakah admin berhasil ditambahkan
           if ($result === true) {
-               // Jika berhasil maka kirim email notifikasi
-               send_email_notification($email, $name);
-               // Dan tampilkan pesan sukses
-               $_SESSION['success_message'] = "Admin added successfully.";
+               // Persiapan email
+               $mail = send_email_prep($email, $name);
+
+               if ($mail) {
+                    // Menyiapkan konten HTML email
+                    $mail->Body = add_admin_mailer($name, $username);
+
+                    try {
+                         // Kirim email
+                         if ($mail->send()) {
+                              $_SESSION['success_message'] = "Admin added successfully.";
+                         } else {
+                              $_SESSION['error'] = "Admin added failed to send email notification. Please try again.";
+                         }
+                    } catch (Exception $e) {
+                         $_SESSION['error'] = 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
+                    }
+               } else {
+                    $_SESSION['error'] = "Failed to prepare email.";
+               }
                redirect_to("admin");
                exit();
           } else {
@@ -72,7 +99,7 @@ function create_admin()
                exit();
           }
      } else {
-          $_SESSION['error'] = "Name and email are required.";
+          $_SESSION['error'] = "Name and username are required.";
      }
      redirect_to("admin");
      exit();

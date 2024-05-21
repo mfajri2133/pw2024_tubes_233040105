@@ -15,7 +15,7 @@ function fetchUsers($search = '')
 
      // Menambahkan kondisi pencarian jika ada input pencarian
      if (!empty($search)) {
-          $sql .= " AND (name LIKE '%$search%' OR email LIKE '%$search%')";
+          $sql .= " AND (name LIKE '%$search%' OR username LIKE '%$search%')";
      }
 
      // Eksekusi query

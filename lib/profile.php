@@ -4,7 +4,7 @@ include_once 'connection.php';
 include_once 'general.php';
 
 
-function update_user_profile($email, $name, $img_profile_path = null)
+function update_user_profile($username, $name, $img_profile_path = null)
 {
      // Menggunakan variabel global $conn untuk konek ke database
      global $conn;
@@ -13,13 +13,13 @@ function update_user_profile($email, $name, $img_profile_path = null)
           // Jika tidak ada gambar profil yang diunggah
           if ($img_profile_path == null) {
                // SQL untuk mengupdate data user tanpa gambar profil
-               $stmt = $conn->prepare("UPDATE users SET email = ?, name= ? WHERE id = ?");
-               $stmt->bind_param("ssi", $email, $name, $_SESSION['user']['id']);
+               $stmt = $conn->prepare("UPDATE users SET username = ?, name= ? WHERE id = ?");
+               $stmt->bind_param("ssi", $username, $name, $_SESSION['user']['id']);
                // Jika ada gambar profil yang diunggah
           } else {
                // SQL untuk mengupdate data user dengan gambar profil
-               $stmt = $conn->prepare("UPDATE users SET email = ?, name= ?, img_profile_path=? WHERE id = ?");
-               $stmt->bind_param("sssi", $email, $name, $img_profile_path, $_SESSION['user']['id']);
+               $stmt = $conn->prepare("UPDATE users SET username = ?, name= ?, img_profile_path=? WHERE id = ?");
+               $stmt->bind_param("sssi", $username, $name, $img_profile_path, $_SESSION['user']['id']);
           }
           // Mengeksekusi query
           $stmt->execute();
