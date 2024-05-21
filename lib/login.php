@@ -14,7 +14,7 @@ function login($username, $password)
      $user = mysqli_fetch_assoc($result);
 
      if (!$user || !password_verify($password, $user['password'])) {
-          set_error_message("username atau password salah");
+          $_SESSION['error'] = ("username atau password salah");
           $_SESSION['post_data'] = $_POST;
           return false;
      }
