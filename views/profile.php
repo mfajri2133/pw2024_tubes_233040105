@@ -1,4 +1,5 @@
 <title>Profile | FWeb</title>
+<?php include_once 'lib/profile.php' ?>
 <?php include_once 'components/layout-top.php' ?>
 
 

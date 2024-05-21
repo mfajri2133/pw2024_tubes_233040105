@@ -18,6 +18,8 @@ function fetchCategories($search = '')
           $sql .= " WHERE name LIKE '%$search%'";
      }
 
+     $sql .= " ORDER BY name ASC";
+
      // Eksekusi query
      $result = mysqli_query($conn, $sql);
 

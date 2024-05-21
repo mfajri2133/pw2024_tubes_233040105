@@ -2,6 +2,7 @@
 <?php include_once 'components/layout-top.php' ?>
 
 <?php include_once '../lib/general.php' ?>
+<?php include_once '../lib/admin.php' ?>
 <?php
 $users = fetchAdmin();
 ?>

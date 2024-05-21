@@ -24,21 +24,21 @@ $(document).ready(function () {
                     // Looping data yang ditemukan dari server
                     response.forEach(function (category) {
                          var categoryRow = `
-                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                              <td class="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white border-r sm:w-72">
-                                   <div class="ps-3">
-                                        <div class="text-base ">${category.name}</div>
-                                   </div>
-                              </td>
-                              <td class="px-4 py-4 text-center w-24">
-                                   <button type="button" data-modal-target="editModal${category.id}" data-modal-show="editModal${category.id}" class="bg-green-600 rounded-full w-10 h-10 text-xs text-white edit-button">
-                                        <i class="fa-solid fa-pen"></i>
-                                   </button>
-                                   <button type="button" data-modal-target="deleteModal${category.id}" data-modal-show="deleteModal${category.id}" class="bg-red-600 rounded-full w-10 h-10 text-xs text-white delete-button">
-                                        <i class="fa-solid fa-trash"></i>
-                                   </button>
-                              </td>
-                         </tr>`;
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                         <td class="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white border-r sm:w-72">
+                              <div class="ps-3">
+                                   <div class="text-base ">${category.name}</div>
+                              </div>
+                         </td>
+                         <td class="px-4 py-4 text-center w-24">
+                              <button type="button" data-modal-target="editModal${category.id}" data-modal-show="editModal${category.id}" class="bg-green-600 rounded-full w-10 h-10 text-xs text-white edit-button">
+                                   <i class="fa-solid fa-pen"></i>
+                              </button>
+                              <button type="button" data-modal-target="deleteModal${category.id}" data-modal-show="deleteModal${category.id}" class="bg-red-600 rounded-full w-10 h-10 text-xs text-white delete-button">
+                                   <i class="fa-solid fa-trash"></i>
+                              </button>
+                         </td>
+                    </tr>`;
                          //  tbody diisi dengan data yang ditemukan saat search
                          tbody.append(categoryRow);
                     });
@@ -82,19 +82,18 @@ $(document).ready(function () {
           // Tutup modal dan overlay
           $("#" + target).addClass("hidden");
           $("#overlay").addClass("hidden");
-     });
-});
-
-$(document).ready(function () {
-     // Ketika tombol close modal diklik
-     $(document).on("click", ".close-modal", function () {
-          // Ambil target modal yang akan ditutup
-          var target = $(this).data("modal-hide");
-          // Tutup modal dan overlay
-          $("#" + target).addClass("hidden");
-          $("#overlay").addClass("hidden");
           // Reset formulir
           resetForm($("#" + target));
+     });
+
+     // Ketika overlay diklik
+     $("#overlay").on("click", function () {
+          $(".modal").each(function () {
+               var modal = $(this);
+               modal.addClass("hidden");
+               resetForm(modal);
+          });
+          $(this).addClass("hidden");
      });
 
      // Fungsi untuk mereset formulir

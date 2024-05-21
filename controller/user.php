@@ -1,6 +1,7 @@
 <?php
 include_once '../helpers/users.php';
 include_once "../lib/general.php";
+include_once "../lib/user.php";
 session_start();
 
 // Pengecekan method yang digunakan

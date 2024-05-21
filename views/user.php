@@ -1,4 +1,5 @@
 <?php include_once '../lib/general.php' ?>
+<?php include_once '../lib/user.php' ?>
 <?php
 $users = fetchUsers();
 ?>

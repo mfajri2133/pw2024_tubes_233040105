@@ -1,6 +1,7 @@
 <?php
-include_once '../lib/general.php';
 include_once '../helpers/users.php';
+include_once '../lib/general.php';
+include_once '../lib/admin.php';
 include_once '../helpers/add_admin_mailer.php';
 session_start();
 
@@ -55,8 +56,8 @@ function create_admin()
                exit();
           }
 
-          // Jika belum terdaftar panggil fungsi add_admin_user
-          $result = add_admin_user($name, $email);
+          // Jika belum terdaftar panggil fungsi add_admin
+          $result = add_admin($name, $email);
           // Cek apakah admin berhasil ditambahkan
           if ($result === true) {
                // Jika berhasil maka kirim email notifikasi
@@ -85,7 +86,7 @@ function delete_admin()
           // Simpan data id ke dalam variabel
           $id = $_POST['id'];
           // Panggil fungsi soft_destroy dan kirimkan id
-          $result = soft_destroy($id);
+          $result = destroy($id);
           // Cek apakah admin berhasil dihapus
           if ($result === true) {
                $_SESSION['success_message'] = "Admin deleted successfully.";
@@ -105,9 +106,13 @@ function delete_admin()
 
 function search_admin()
 {
+     // Ambil data search jika ada
      $search = isset($_GET['search']) ? $_GET['search'] : '';
+     // Panggil fungsi fetchAdmin dengan parameter search
      $users = fetchAdmin($search);
 
+     // Set header response
      header('Content-Type: application/json');
+     // Tampilkan data dalam format JSON
      echo json_encode($users);
 }
