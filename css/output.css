@@ -1441,8 +1441,8 @@ input:checked + .toggle-bg {
   margin-top: 3.8rem;
 }
 
-.\!mr-3 {
-  margin-right: 0.75rem !important;
+.mt-3 {
+  margin-top: 0.75rem;
 }
 
 .block {
@@ -1530,6 +1530,10 @@ input:checked + .toggle-bg {
   height: 100vh;
 }
 
+.h-auto {
+  height: auto;
+}
+
 .max-h-full {
   max-height: 100%;
 }
@@ -1603,8 +1607,16 @@ input:checked + .toggle-bg {
   width: 100%;
 }
 
+.max-w-\[38rem\] {
+  max-width: 38rem;
+}
+
 .max-w-md {
   max-width: 28rem;
+}
+
+.max-w-sm {
+  max-width: 24rem;
 }
 
 .max-w-xs {
@@ -1681,6 +1693,10 @@ input:checked + .toggle-bg {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .grid-cols-4 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
@@ -1691,6 +1707,10 @@ input:checked + .toggle-bg {
 
 .content-center {
   align-content: center;
+}
+
+.content-end {
+  align-content: flex-end;
 }
 
 .items-start {
@@ -1772,6 +1792,10 @@ input:checked + .toggle-bg {
 
 .overflow-hidden {
   overflow: hidden;
+}
+
+.overflow-x-auto {
+  overflow-x: auto;
 }
 
 .overflow-y-auto {
@@ -2103,6 +2127,10 @@ input:checked + .toggle-bg {
   text-align: center;
 }
 
+.text-end {
+  text-align: end;
+}
+
 .align-middle {
   vertical-align: middle;
 }
@@ -2139,6 +2167,14 @@ input:checked + .toggle-bg {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
+}
+
+.text-\[8px\] {
+  font-size: 8px;
+}
+
+.text-\[10px\] {
+  font-size: 10px;
 }
 
 .font-bold {
@@ -2226,6 +2262,11 @@ input:checked + .toggle-bg {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-red-400 {
+  --tw-text-opacity: 1;
+  color: rgb(249 128 128 / var(--tw-text-opacity));
 }
 
 .opacity-0 {
@@ -2565,6 +2606,10 @@ input:checked + .toggle-bg {
     z-index: 50;
   }
 
+  .sm\:col-span-2 {
+    grid-column: span 2 / span 2;
+  }
+
   .sm\:m-4 {
     margin: 1rem;
   }
@@ -2599,6 +2644,10 @@ input:checked + .toggle-bg {
 
   .sm\:grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  .sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .sm\:items-center {
