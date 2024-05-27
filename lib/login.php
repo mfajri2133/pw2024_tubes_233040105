@@ -22,26 +22,3 @@ function login($username, $password)
      $_SESSION['user'] = $user;
      return $user;
 }
-
-
-// $username = $_POST['username'];
-// $password = $_POST['password'];
-// $result = login($email, $password);
-
-// function redirect_url($user)
-// {
-//      if ($user['is_admin'] == 1) {
-//           header("Location: ../views/dashboard.php");
-//           exit;
-//      } else {
-//           header("Location: ../views/index.php");
-//           exit;
-//      }
-// }
-
-
-// if (is_array($result)) {
-//      redirect_url($result);
-// } else {
-//      echo "Login gagal: " . $result;
-// }

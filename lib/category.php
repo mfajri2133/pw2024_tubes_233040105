@@ -77,13 +77,31 @@ function destroy_category($id)
 {
      // Menggunakan variabel global $conn untuk konek ke database
      global $conn;
-     // SQL untuk menghapus kategori
-     $sql = mysqli_prepare($conn, "DELETE FROM categories WHERE id = ?");
-     // Mengikat parameter dan mengeksekusi query
-     mysqli_stmt_bind_param($sql, "i", $id);
-     $result = mysqli_stmt_execute($sql);
-     // Menutup statement
-     mysqli_stmt_close($sql);
-     // Mengembalikan status berhasil atau tidak
-     return $result;
+
+     $result_delete_categories = destroy_movie_categories($id);
+
+     if ($result_delete_categories) {
+          // SQL untuk menghapus kategori
+          $sql = "DELETE FROM categories WHERE id = ?";
+          // Mengikat parameter dan mengekusi query
+          $stmt = $conn->prepare($sql);
+          $stmt->bind_param('i', $id);
+          $result = $stmt->execute();
+          // Menutup statement
+          $stmt->close();
+          // Mengembalikan status berhasil atau tidak
+          return $result;
+     } else {
+          return false;
+     }
+}
+
+function destroy_movie_categories($id)
+{
+     global $conn;
+
+     $sql = "DELETE FROM movie_categories WHERE category_id = ?";
+     $stmt = $conn->prepare($sql);
+     $stmt->bind_param('i', $id);
+     return $stmt->execute();
 }

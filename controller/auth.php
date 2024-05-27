@@ -26,7 +26,6 @@ switch ($_SERVER['REQUEST_METHOD']) {
           break;
           // Jika method yang digunakan bukan POST
      default:
-
           redirect_to("login");
           break;
 }
@@ -41,6 +40,7 @@ function handle_login()
           if (is_array($result)) {
                if ($result['is_active'] == 1) {
                     $_SESSION['user_logged_in'] = true;
+                    $_SESSION['success_message'] = 'Welcome back, ' . $result['name'] . '!';
                     if ($result['is_admin'] == 1) {
                          redirect_to("dashboard");
                     } else {

@@ -11,3 +11,7 @@ body::-webkit-scrollbar {
      visibility: hidden;
      transition: opacity 0.5s ease, visibility 0.5s ease;
 }
+
+.spacemono {
+     font-family: "Space Mono", monospace;
+}

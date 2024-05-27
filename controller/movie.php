@@ -43,7 +43,6 @@ switch ($_SERVER['REQUEST_METHOD']) {
           break;
 }
 
-
 function create_movie()
 {
      // Ambil data dari form
@@ -53,10 +52,11 @@ function create_movie()
      $director = $_POST['director'];
      $producer = $_POST['producer'];
      $description = $_POST['description'];
+     $trailer_url = $_POST['trailer_url'];
 
      $release_date = date('Y-m-d', strtotime($release_date));
      // Simpan data ke database tanpa poster untuk mendapatkan ID film
-     $movie_id = saveMovieWithoutPoster($name, $duration, $release_date, $director, $producer, $description);
+     $movie_id = saveMovieWithoutPoster($name, $duration, $release_date, $director, $producer, $description, $trailer_url);
 
      if ($movie_id === false) {
           $_SESSION['error'] = "Failed to create movie.";
@@ -94,7 +94,6 @@ function create_movie()
      }
 }
 
-
 function update_movie()
 {
      if (isset($_POST['id'])) {
@@ -105,6 +104,7 @@ function update_movie()
           $director = $_POST['director'];
           $producer = $_POST['producer'];
           $description = $_POST['description'];
+          $trailer_url = $_POST['trailer_url'];
 
           $release_date = date('Y-m-d', strtotime($release_date));
 
@@ -123,7 +123,7 @@ function update_movie()
           }
 
           // Update movie details
-          $result = updateMovie($id, $name, $duration, $release_date, $director, $producer, $description, $poster_path);
+          $result = updateMovie($id, $name, $duration, $release_date, $director, $producer, $description, $poster_path, $trailer_url);
 
           // Update categories
           if (isset($_POST['categories']) && is_array($_POST['categories'])) {
@@ -147,7 +147,6 @@ function update_movie()
      redirect_to("movie");
      exit();
 }
-
 
 function uploadPoster($movie_id)
 {
@@ -181,9 +180,6 @@ function uploadPoster($movie_id)
      }
      return false;
 }
-
-
-
 
 function delete_movie()
 {

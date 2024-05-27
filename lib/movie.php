@@ -18,8 +18,6 @@ function fetchMovies($search = '')
           $sql .= " WHERE name LIKE '%$search%'";
      }
 
-     $sql .= " ORDER BY release_date ASC";
-
      // Eksekusi query
      $result = mysqli_query($conn, $sql);
 
@@ -34,13 +32,13 @@ function fetchMovies($search = '')
      return $movies;
 }
 
-function saveMovieWithoutPoster($name, $duration, $release_date, $director, $producer, $description)
+function saveMovieWithoutPoster($name, $duration, $release_date, $director, $producer, $description, $trailer_url)
 {
      global $conn;
-     $query = "INSERT INTO movies (name, duration, release_date, director, producer, description) 
-               VALUES (?, ?, ?, ?, ?, ?)";
+     $query = "INSERT INTO movies (name, duration, release_date, director, producer, description, trailer_url) 
+               VALUES (?, ?, ?, ?, ?, ?, ?)";
      $stmt = $conn->prepare($query);
-     $stmt->bind_param('ssssss', $name, $duration, $release_date, $director, $producer, $description);
+     $stmt->bind_param('sssssss', $name, $duration, $release_date, $director, $producer, $description, $trailer_url);
 
      if ($stmt->execute()) {
           return $stmt->insert_id; // Mengembalikan ID film yang baru disimpan
@@ -108,12 +106,12 @@ function get_movie_poster($id)
      return false;
 }
 
-function updateMovie($id, $name, $duration, $release_date, $director, $producer, $description, $poster_path)
+function updateMovie($id, $name, $duration, $release_date, $director, $producer, $description, $poster_path, $trailer_url)
 {
      global $conn;
-     $sql = "UPDATE movies SET name=?, duration=?, release_date=?, director=?, producer=?, description=?, poster_path=? WHERE id=?";
+     $sql = "UPDATE movies SET name=?, duration=?, release_date=?, director=?, producer=?, description=?, poster_path=?, trailer_url=? WHERE id=?";
      $stmt = $conn->prepare($sql);
-     $stmt->bind_param('sisssssi', $name, $duration, $release_date, $director, $producer, $description, $poster_path, $id);
+     $stmt->bind_param('sissssssi', $name, $duration, $release_date, $director, $producer, $description, $poster_path, $trailer_url, $id);
      return $stmt->execute();
 }
 
@@ -124,4 +122,21 @@ function deleteMovieCategories($id)
      $stmt = $conn->prepare($sql);
      $stmt->bind_param('i', $id);
      return $stmt->execute();
+}
+
+if (!function_exists('fetchMovieCategoryIds')) {
+     function fetchMovieCategoryIds($movieId)
+     {
+          global $conn;
+          $sql = "SELECT category_id FROM movie_categories WHERE movie_id = ?";
+          $stmt = $conn->prepare($sql);
+          $stmt->bind_param('i', $movieId);
+          $stmt->execute();
+          $result = $stmt->get_result();
+          $categoryIds = [];
+          while ($row = $result->fetch_assoc()) {
+               $categoryIds[] = $row['category_id'];
+          }
+          return $categoryIds;
+     }
 }

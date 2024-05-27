@@ -22,15 +22,25 @@ switch ($_SERVER['REQUEST_METHOD']) {
                     delete_profile_image();
                     break;
                default:
-                    redirect_to("category");
-                    break;
+                    if ($_SESSION['user']['is_admin'] == 1) {
+                         redirect_to("profile");
+                         break;
+                    } else {
+                         redirect_to("profile-user");
+                         break;
+                    }
           }
           break;
           // jika method yang digunakan bukan POST maka redirect ke halaman profile dan tidak menjalankan fungsi apapun
      default:
           $_SESSION['error'] = "Invalid request.";
-          redirect_to("profile");
-          break;
+          if ($_SESSION['user']['is_admin'] == 1) {
+               redirect_to("profile");
+               break;
+          } else {
+               redirect_to("profile-user");
+               break;
+          }
 }
 
 // Fungsi untuk mengupdate profil pengguna
@@ -52,18 +62,33 @@ function update_profile()
                if ($result === true) {
                     // Jika penyimpanan berhasil, lakukan tindakan selanjutnya
                     $_SESSION['success_message'] = "Profile successfully changed.";
-                    redirect_to("profile"); // Redirect ke halaman dashboard atau halaman lainnya
-                    exit();
+                    if ($_SESSION['user']['is_admin'] == 1) {
+                         redirect_to("profile");
+                         exit();
+                    } else {
+                         redirect_to("profile-user");
+                         exit();
+                    }
                } else {
                     $_SESSION['error'] = "username is already in use.";
-                    redirect_to("profile"); // Redirect kembali ke halaman pengeditan profil
-                    exit();
+                    if ($_SESSION['user']['is_admin'] == 1) {
+                         redirect_to("profile");
+                         exit();
+                    } else {
+                         redirect_to("profile-user");
+                         exit();
+                    }
                }
           }
      } else {
           $_SESSION['error'] = "Invalid request.";
-          redirect_to("profile"); // Redirect kembali ke halaman pengeditan profil
-          exit();
+          if ($_SESSION['user']['is_admin'] == 1) {
+               redirect_to("profile");
+               exit();
+          } else {
+               redirect_to("profile-user");
+               exit();
+          }
      }
 }
 
@@ -105,22 +130,42 @@ function upload_img($username, $name)
                if ($result === true) {
                     // Jika penyimpanan berhasil, lakukan tindakan selanjutnya
                     $_SESSION['success_message'] = "Profile successfully changed.";
-                    redirect_to("profile");
-                    exit();
+                    if ($_SESSION['user']['is_admin'] == 1) {
+                         redirect_to("profile");
+                         exit();
+                    } else {
+                         redirect_to("profile-user");
+                         exit();
+                    }
                } else {
                     $_SESSION['error'] = "Failed to save profile. Please try again.";
-                    redirect_to("profile");
-                    exit();
+                    if ($_SESSION['user']['is_admin'] == 1) {
+                         redirect_to("profile");
+                         exit();
+                    } else {
+                         redirect_to("profile-user");
+                         exit();
+                    }
                }
           } else {
                $_SESSION['error'] = "Failed to upload file. Please try again.";
-               redirect_to("profile");
-               exit();
+               if ($_SESSION['user']['is_admin'] == 1) {
+                    redirect_to("profile");
+                    exit();
+               } else {
+                    redirect_to("profile-user");
+                    exit();
+               }
           }
      } else {
           $_SESSION['error'] = "File size too large.";
-          redirect_to("profile");
-          exit();
+          if ($_SESSION['user']['is_admin'] == 1) {
+               redirect_to("profile");
+               exit();
+          } else {
+               redirect_to("profile-user");
+               exit();
+          }
      }
 }
 
@@ -138,26 +183,46 @@ function change_password()
           if (!verify_old_password($user_id, $old_password)) {
                // Jika password lama salah, tampilkan pesan error
                $_SESSION['error'] = "Invalid old password.";
-               redirect_to("profile"); // Redirect kembali ke halaman pengeditan profil
-               exit();
+               if ($_SESSION['user']['is_admin'] == 1) {
+                    redirect_to("profile");
+                    exit();
+               } else {
+                    redirect_to("profile-user");
+                    exit();
+               }
           }
 
           // Update password baru
           $result = update_user_password($user_id, $new_password);
           if ($result === true) {
                $_SESSION['success_message'] = "Password changed successfully.";
-               redirect_to("profile");
-               exit();
+               if ($_SESSION['user']['is_admin'] == 1) {
+                    redirect_to("profile");
+                    exit();
+               } else {
+                    redirect_to("profile-user");
+                    exit();
+               }
           } else {
                $_SESSION['error'] = "Failed to change password. please try again.";
-               redirect_to("profile");
-               exit();
+               if ($_SESSION['user']['is_admin'] == 1) {
+                    redirect_to("profile");
+                    exit();
+               } else {
+                    redirect_to("profile-user");
+                    exit();
+               }
           }
      } else {
           $_SESSION['error'] = "Invalid request.";
      }
-     redirect_to("profile"); // Redirect kembali ke halaman pengeditan profil
-     exit();
+     if ($_SESSION['user']['is_admin'] == 1) {
+          redirect_to("profile");
+          exit();
+     } else {
+          redirect_to("profile-user");
+          exit();
+     }
 }
 
 // Fungsi untuk menghapus foto profil
@@ -187,17 +252,32 @@ function delete_profile_image()
 
                if ($result === true) {
                     $_SESSION['success_message'] = "Profile image deleted successfully.";
-                    redirect_to("profile");
-                    exit();
+                    if ($_SESSION['user']['is_admin'] == 1) {
+                         redirect_to("profile");
+                         exit();
+                    } else {
+                         redirect_to("profile-user");
+                         exit();
+                    }
                } else {
                     $_SESSION['error'] = "Failed to delete profile image from the database.";
-                    redirect_to("profile");
-                    exit();
+                    if ($_SESSION['user']['is_admin'] == 1) {
+                         redirect_to("profile");
+                         exit();
+                    } else {
+                         redirect_to("profile-user");
+                         exit();
+                    }
                }
           } else {
                $_SESSION['error'] = "User not found.";
           }
-          redirect_to("profile");
-          exit();
+          if ($_SESSION['user']['is_admin'] == 1) {
+               redirect_to("profile");
+               exit();
+          } else {
+               redirect_to("profile-user");
+               exit();
+          }
      }
 }

@@ -1,6 +1,7 @@
 <title>Movie movie | FWeb</title>
 <?php include_once 'components/layout-top.php' ?>
 <?php include_once '../lib/general.php' ?>
+<?php include_once '../lib/connection.php' ?>
 <?php include_once '../lib/movie.php' ?>
 <?php include_once '../lib/category.php' ?>
 
@@ -132,6 +133,7 @@ $categories = fetchCategories();
                                                        <span class="sr-only">Close modal</span>
                                                   </button>
                                              </div>
+
                                              <!-- Modal body -->
                                              <form action="<?= base_url('/controller/movie.php?action=update') ?>" method="POST" class="m-0" enctype="multipart/form-data">
                                                   <input type="hidden" name="id" value="<?= $movie['id'] ?>">
@@ -175,21 +177,6 @@ $categories = fetchCategories();
                                                        </div>
 
                                                        <?php
-                                                       function fetchMovieCategoryIds($movieId)
-                                                       {
-                                                            global $conn;
-                                                            $sql = "SELECT category_id FROM movie_categories WHERE movie_id = ?";
-                                                            $stmt = $conn->prepare($sql);
-                                                            $stmt->bind_param('i', $movieId);
-                                                            $stmt->execute();
-                                                            $result = $stmt->get_result();
-                                                            $categoryIds = [];
-                                                            while ($row = $result->fetch_assoc()) {
-                                                                 $categoryIds[] = $row['category_id'];
-                                                            }
-                                                            return $categoryIds;
-                                                       }
-
                                                        $movieCategoryIds = fetchMovieCategoryIds($movie['id']);
                                                        ?>
 
@@ -206,10 +193,13 @@ $categories = fetchCategories();
 
                                                        <div class="mb-4">
                                                             <label for="poster_path" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Poster Image</label>
-                                                            <input type="hidden" id="current_poster_path" value="<?= htmlspecialchars($movie['poster_path']) ?>">
                                                             <input id="poster_path" name="poster_path" type="file" accept=".png, .jpg, .jpeg" class="block w-full file:!text-xs file:!bg-blue-400 text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help">
                                                             <p class="mt-1 text-xs text-red-600 dark:text-gray-300" id="file_input_help">JPEG, PNG or JPG (MAX 5MB).</p>
-                                                            <div id="current_poster_display" class="mt-2 text-gray-600 dark:text-gray-300"></div>
+                                                       </div>
+
+                                                       <div class="mb-4">
+                                                            <label for="trailer_url" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Link Trailer</label>
+                                                            <input type="url" id="trailer_url" name="trailer_url" placeholder="https://example.com" pattern="https://.*" value="<?= isset($movie['trailer_url']) ? htmlspecialchars($movie['trailer_url']) : '' ?>" required class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                                        </div>
 
                                                        <div class="mb-4">
@@ -304,12 +294,17 @@ $categories = fetchCategories();
                          </div>
 
                          <div class="mb-4">
+                              <label for="trailer_url" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Link Trailer</label>
+                              <input type="url" id="trailer_url" name="trailer_url" placeholder="https://example.com" pattern="https://.*" required class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                         </div>
+
+                         <div class="mb-4">
                               <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Movie Description</label>
                               <textarea id="description" required name="description" rows="4" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write description movie here..."></textarea>
                          </div>
 
                          <div class="flex justify-end">
-                              <button type="submit" id="submit-button" class="text-white items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                              <button type=" submit" id="submit-button" class="text-white items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                    Save
                               </button>
                          </div>
@@ -322,10 +317,126 @@ $categories = fetchCategories();
 </div>
 
 
-<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="../node_modules/flowbite/dist/datepicker.js"></script>
-<script src="<?= base_url('/js/search-movie-ajax.js') ?>"></script>
 <script src="<?= base_url('/js/modal.js') ?>"></script>
+<script>
+     const formatDate = (dateString) => {
+          const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+          const date = new Date(dateString);
+          const day = date.getDate();
+          const monthIndex = date.getMonth();
+          const year = date.getFullYear();
+          return `${day} ${months[monthIndex]} ${year}`;
+     };
+     // Ajax search untuk kategori
+     $(document).ready(function() {
+          // Ketika input search diisi
+          $("#table-search").on("input", function() {
+               // Ambil value dari input search
+               var search = $(this).val();
+               // Lakukan request ajax jika value tidak kosong
+               $.ajax({
+                    // Menggunakan URL dari controller movie.php
+                    url: "../controller/movie.php?action=search",
+                    // Menggunakan method GET
+                    type: "GET",
+                    // Dengan tipe data JSON (JavaScript Object Notation)
+                    dataType: "json",
+                    // Mengirimkan data search ke server
+                    data: {
+                         search: search,
+                    },
+                    // Jika request berhasil
+                    success: function(response) {
+                         // Kosongkan tbody dari table
+                         var tbody = $("#table-body");
+                         tbody.empty();
+                         // Looping data yang ditemukan dari server
+                         if (response.length == 0) {
+                              var notFoundRow = `
+                                   <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 not-found">
+                                        <td colspan="4" class="px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white text-center">
+                                             No data found
+                                        </td>
+                                   </tr>`;
+                              tbody.append(notFoundRow);
+                         } else {
+                              response.forEach(function(movie) {
+                                   var movieRow = `
+                              <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                   <td class="px-6 py-3 text-gray-900 whitespace-nowrap dark:text-white border-r w-40 sm:w-72">
+                                        <div>
+                                             <img src="${movie.poster_path ? '<?= base_url() ?>' + movie.poster_path : '<?= base_url('/uploads/profile-pict/default-user-picture.png') ?>'}" alt="Movie Poster" >
+                                        </div>
+                                   </td>
+                                   <td class="px-6 py-3 text-gray-900 whitespace-nowrap dark:text-white border-r w-64 sm:w-72">
+                                        <div class="ps-3">
+                                             <div class="text-base ">${movie.name}</div>
+                                        </div>
+                                   </td>
+                                   <td class="px-6 py-3 text-gray-900 whitespace-nowrap dark:text-white border-r w-64 sm:w-72">
+                                        <div class="ps-3">
+                                             <div class="text-base">${formatDate(movie.release_date)}</div>
+                                        </div>
+                                   </td>
+                                   <td class="px-4 py-3 text-center w-32 sm:flex sm:justify-center sm:items-center sm:space-x-2">
+                                        <button type="button" data-modal-target="editModal${movie.id}" data-modal-show="editModal${movie.id}" class="bg-green-600 rounded-full w-10 h-10 text-xs text-white edit-button">
+                                             <i class="fa-solid fa-pen"></i>
+                                        </button>
+                                        <button type="button" data-modal-target="deleteModal${movie.id}" data-modal-show="deleteModal${movie.id}" class="bg-red-600 rounded-full w-10 h-10 text-xs text-white delete-button">
+                                             <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                   </td>
+                              </tr>`;
+                                   //  tbody diisi dengan data yang ditemukan saat search
+                                   tbody.append(movieRow);
+                              });
+                         }
+                    },
+                    // Jika request gagal
+                    error: function(xhr, status, error) {
+                         // Log error ke console
+                         console.error("Error: " + error);
+                         console.error("Status: " + status);
+                         console.dir(xhr);
+                    },
+               });
+          });
+
+          // Ketika tombol edit diklik
+          $(document).on("click", ".edit-button", function() {
+               // Ambil target modal yang akan ditampilkan
+               var target = $(this).data("modal-target");
+               // Tampilkan modal dan overlay
+               $("#" + target)
+                    .removeClass("hidden")
+                    .addClass("flex items-center justify-center");
+               $("#overlay").removeClass("hidden");
+          });
+
+          // Ketika tombol delete diklik
+          $(document).on("click", ".delete-button", function() {
+               // Ambil target modal yang akan ditampilkan
+               var target = $(this).data("modal-target");
+               // Tampilkan modal dan overlay
+               $("#" + target)
+                    .removeClass("hidden")
+                    .addClass("flex items-center justify-center");
+               $("#overlay").removeClass("hidden");
+          });
+
+          // Ketika tombol close modal diklik
+          $(document).on("click", ".close-modal", function() {
+               // Ambil target modal yang akan ditutup
+               var target = $(this).data("modal-hide");
+               // Tutup modal dan overlay
+               $("#" + target).addClass("hidden");
+               $("#overlay").addClass("hidden");
+               // Reset formulir
+          });
+     });
+</script>
 
 
 

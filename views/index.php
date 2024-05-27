@@ -1,32 +1,13 @@
-<?php
-include_once '../helpers/users.php';
-start_session();
+<?php include_once 'components/layout-user-top.php' ?>
+<title>FWeb</title>
 
 
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Index</title>
-     <link rel="stylesheet" href="<?= base_url("/css/output.css") ?>">
-</head>
-
-<body class="bg-gray-100 flex items-center justify-center h-screen">
-     <div class="bg-white shadow-md rounded-md p-8 max-w-md w-full">
-          <h2 class="text-2xl font-bold mb-6 text-center">Index user</h2>
-          <h1>selamat datang dihalaman index</h1>
-
-          <?php if (login_check()) : ?>
-               <a href="<?= base_url("/lib/logout.php") ?>" class="w-full bg-red-500 text-black font-semibold py-2 px-4 rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600">Logout</a>
-          <?php else : ?>
-               <a href="<?= base_url("/views/login.php") ?>" class="w-full bg-red-500 text-black font-semibold py-2 px-4 rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600">login</a>
-          <?php endif; ?>
-
+<section class="relative h-screen w-full">
+     <img src="../uploads/prism.png" class="h-full w-full object-cover filter" alt="Background Image">
+     <div class="absolute inset-0 flex items-center justify-center ">
+          <h1 class="text-6xl font-bold font-fweb-blue">WELCOME</h1>
      </div>
-</body>
+</section>
 
-</html>
+
+<?php include_once 'components/layout-user-bottom.php' ?>
