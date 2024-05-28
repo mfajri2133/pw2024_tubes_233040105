@@ -111,3 +111,44 @@ function is_username_exists($username)
           return false;
      }
 }
+
+
+function getMovies($order = 'latest', $limit = 10, $offset = 0)
+{
+     global $conn;
+     // Sesuaikan query berdasarkan $order
+     if ($order == 'latest') {
+          $order_by = "ORDER BY release_date DESC";
+     } elseif ($order == 'oldest') {
+          $order_by = "ORDER BY release_date ASC";
+     } else {
+          $order_by = "";
+     }
+
+     // Query untuk mengambil film dengan batasan dan offset
+     $query = "SELECT * FROM movies $order_by LIMIT $limit OFFSET $offset";
+     $result = $conn->query($query);
+
+     $movies = [];
+     while ($row = $result->fetch_assoc()) {
+          $movies[] = [
+               'id' => $row['id'],
+               'name' => $row['name'],
+               'release_date' => $row['release_date'],
+               'poster_path' => $row['poster_path'],
+               // 'category' => $row['category'] // Pastikan kategori disimpan sebagai string yang dipisahkan koma
+          ];
+     }
+
+     return $movies;
+}
+
+function countTotalMovies()
+{
+     global $conn;
+     // Query untuk menghitung total film
+     $query = "SELECT COUNT(*) AS total FROM movies";
+     $result = $conn->query($query);
+     $row = $result->fetch_assoc();
+     return $row['total'];
+}

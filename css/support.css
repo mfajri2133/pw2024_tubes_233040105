@@ -12,6 +12,6 @@ body::-webkit-scrollbar {
      transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
-.spacemono {
-     font-family: "Space Mono", monospace;
+.poppins {
+     font-family: "Poppins", sans-serif;
 }
