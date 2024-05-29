@@ -3,7 +3,7 @@
 
 
 
-<div class="bg-white shadow-md rounded-md py-8 px-44 sm:px-8 min-h-full w-full mt-[68px]">
+<div class="bg-white  py-8 px-44 sm:px-8 min-h-full w-full ">
      <div class="border-2 rounded-md mb-8">
           <div class="grid grid-cols-2 sm:grid-cols-1 p-6">
                <div class="sm:mb-4">
