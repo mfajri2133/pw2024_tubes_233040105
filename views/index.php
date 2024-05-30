@@ -11,7 +11,7 @@ $movies = getMovies($current_page);
 
 <section class="h-screen w-full bg-[#181a1b] flex items-center justify-center ">
      <div class="px-4 mx-auto max-w-screen-xl text-center ">
-          <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl poppins">Experience the Magic of <p class="text-[#007bff]">Movie.</p>
+          <h1 class="mb-4 text-6xl font-extrabold tracking-tight leading-none text-white md:text-5xl sm:text-3xl  poppins">Experience the Magic of <p class="text-[#007bff]">Movie.</p>
           </h1>
           <p class="mb-8 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48">
                At FWeb Movie, we bring you movie details and reviews. Discover the latest blockbusters, timeless classics, and hidden gems that will awaken your passion for movies. Join us and dive into the world of cinema, where every story comes alive.
@@ -27,21 +27,23 @@ $movies = getMovies($current_page);
      </div>
 
      <div class="container mx-auto">
-          <div class="grid sm:grid-cols-2 grid-cols-6 gap-6 sm:gap-4">
-               <?php foreach ($movies as $movie) : ?>
-                    <a href=" movie_detail.php?id=<?= $movie['id'] ?>" class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-lg ">
-                         <img class="rounded-t-lg w-full h-64 object-cover" src="<?= base_url($movie['poster_path']) ?>" alt="<?= $movie['name'] ?>" />
-                         <div class="p-3 text-center">
-                              <h3 class=" text-base font-bold tracking-tight text-gray-900 line-clamp-1"><?= $movie['name'] ?></h3>
-                              <p class="mb-1 text-sm font-medium text-gray-900 ">(<?= date('Y', strtotime($movie['release_date'])) ?>)</p>
-                              <p class=" font-normal text-xs text-gray-700 "><?= $movie['categories'] ?></p>
-                         </div>
-                    </a>
-               <?php endforeach; ?>
+          <div class="grid sm:grid-cols-2 grid-cols-6 md:grid-cols-3 gap-6 sm:gap-4">
+               <?php if (!empty($movies)) : ?>
+                    <?php foreach ($movies as $movie) : ?>
+                         <a href=" movie_detail.php?id=<?= $movie['id'] ?>" class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-lg ">
+                              <img class="rounded-t-lg w-full h-64 object-cover" src="<?= base_url($movie['poster_path']) ?>" alt="<?= $movie['name'] ?>" />
+                              <div class="p-3 text-center">
+                                   <h3 class=" text-base font-bold tracking-tight text-gray-900 line-clamp-1"><?= $movie['name'] ?></h3>
+                                   <p class="text-sm font-medium text-gray-900 ">(<?= date('Y', strtotime($movie['release_date'])) ?>)</p>
+                              </div>
+                         </a>
+                    <?php endforeach; ?>
+               <?php else : ?>
+                    <p class="text-white col-span-6 sm:col-span-2 md:col-span-3">No movies found.</p>
+               <?php endif; ?>
           </div>
      </div>
 </section>
-<?php include_once 'components/ajax-search.php'; ?>
 
 
 <?php include_once 'components/layout-user-bottom.php' ?>

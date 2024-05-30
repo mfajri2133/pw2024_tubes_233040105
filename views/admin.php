@@ -9,7 +9,7 @@ $users = fetchAdmin();
 
 <div id="overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-40"></div>
 <div class="bg-white shadow-md rounded-md p-8 w-full">
-     <div class="flex items-center justify-end space-x-4 pb-4 bg-white dark:bg-gray-900">
+     <div class="flex items-center justify-end sm:justify-center space-x-4 pb-4 bg-white dark:bg-gray-900">
           <label for="table-search" class="sr-only">Search</label>
           <div class="relative">
                <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -21,7 +21,7 @@ $users = fetchAdmin();
           </div>
      </div>
 
-     <div class="sm:overflow-x-auto">
+     <div class="sm:overflow-x-auto md:overflow-x-auto lg:overflow-x-auto">
           <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
                <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400 ">
                     <tr>
@@ -58,11 +58,11 @@ $users = fetchAdmin();
                                              <img class="w-10 h-10 rounded-full object-cover" src="<?= base_url('/uploads/profile-pict/default-user-picture.png') ?>" alt="Profile image">
                                         <?php endif; ?>
                                         <div class="ps-3">
-                                             <div class="text-base "><?= $user['name'] ?></div>
+                                             <div class="text-base text-wrap"><?= $user['name'] ?></div>
                                         </div>
                                    </td>
                                    <td class="px-6 py-3 bg-gray-50 border-r w-64 sm:w-72">
-                                        <div class="font-normal text-gray-500"><?= $user['username'] ?></div>
+                                        <div class="font-normal text-wrap text-gray-500"><?= $user['username'] ?></div>
                                    </td>
                                    <td class="px-4 py-3 text-center w-24">
                                         <?php if ($user['id'] == $_SESSION['user']['id']) : ?>
@@ -199,11 +199,11 @@ $users = fetchAdmin();
                                         <td class="px-6 py-4 flex items-center text-gray-900 whitespace-nowrap dark:text-white border-r sm:w-72">
                                              <img class="w-10 h-10 rounded-full object-cover" src="${user.img_profile_path ? '<?= base_url() ?>' + user.img_profile_path : '<?= base_url('/uploads/profile-pict/default-user-picture.png') ?>'}" alt="Profile image">
                                                   <div class="ps-3">
-                                                       <div class="text-base ">${user.name}</div>
+                                                       <div class="text-base text-wrap">${user.name}</div>
                                                   </div>
                                         </td>
                                         <td class="px-6 py-4 bg-gray-50 border-r sm:w-72">
-                                             <div class="font-normal text-gray-500">${user.username}</div>
+                                             <div class="font-normal text-wrap text-gray-500">${user.username}</div>
                                         </td>
                                         <td class="px-4 py-4 text-center w-24">
                                              ${user.id == <?= $_SESSION['user']['id'] ?> ? 

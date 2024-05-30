@@ -19,15 +19,15 @@ $total_pages = ceil($total_movies / $limit);
      <div class="container mx-auto">
           <h1 class="text-white text-3xl mb-5">Search Results for "<?= htmlspecialchars($query) ?>"</h1>
 
-          <div id="movies-container" class="grid sm:grid-cols-2 grid-cols-6 gap-6 sm:gap-4 mb-5">
+          <div id="movies-container" class="grid sm:grid-cols-2 grid-cols-6 md:grid-cols-4 gap-6 sm:gap-4 mb-5">
                <?php if (count($movies) > 0) : ?>
                     <?php foreach ($movies as $movie) : ?>
                          <a href="movie_detail.php?id=<?= $movie['id'] ?>" class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-lg ">
                               <img class="rounded-t-lg w-full h-64 object-cover" src="<?= base_url($movie['poster_path']) ?>" alt="<?= $movie['name'] ?>" />
                               <div class="p-3 text-center">
                                    <h3 class="text-base font-bold tracking-tight text-gray-900 line-clamp-1"><?= $movie['name'] ?></h3>
-                                   <p class="mb-1 text-sm font-medium text-gray-900 ">(<?= date('Y', strtotime($movie['release_date'])) ?>)</p>
-                                   <p class="font-normal text-xs text-gray-700 "><?= $movie['categories'] ?></p>
+                                   <p class=" text-sm font-medium text-gray-900 ">(<?= date('Y', strtotime($movie['release_date'])) ?>)</p>
+
                               </div>
                          </a>
                     <?php endforeach; ?>
@@ -46,7 +46,6 @@ $total_pages = ceil($total_movies / $limit);
      </div>
 </section>
 
-<?php include_once 'components/ajax-search.php'; ?>
 
 
 

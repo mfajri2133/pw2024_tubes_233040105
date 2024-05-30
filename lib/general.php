@@ -121,30 +121,17 @@ function getMovies($order = 'latest', $limit = 6, $offset = 0)
 {
      global $conn;
 
-     // Sesuaikan query berdasarkan $order
-     // Jika $order adalah 'latest', urutkan berdasarkan release_date secara descending
      if ($order == 'latest') {
           $order_by = "ORDER BY movies.release_date DESC";
-          // Jika $order adalah 'oldest', urutkan berdasarkan release_date secara ascending
      } elseif ($order == 'oldest') {
           $order_by = "ORDER BY movies.release_date ASC";
-          // Jika $order tidak valid, jangan gunakan ORDER BY
      } else {
           $order_by = "";
      }
 
-     // Query untuk mengambil film dengan kategori yang di-join menggunakan GROUP_CONCAT dan LEFT JOIN untuk mengambil semua film meskipun tidak memiliki kategori
-     // Cara baca querynya adalah:
-     // 1. Memilih semua kolom dari tabel movies
-     // 2. Menggabungkan nama-nama kategori yang terikat dengan sebuah film menjadi satu string dengan pemisah ', ' dan memberikan alias 'categories'
-     // 3. Mengambil data dari tabel movies
-     // 4. Menggabungkan tabel movies dengan tabel movie_categories menggunakan LEFT JOIN 
-     // 5. Menggabungkan tabel movie_categories dengan tabel categories menggunakan LEFT JOIN
-     // 6. Mengelompokkan data berdasarkan id film
-     // 7. Mengurutkan data berdasarkan $order_by
-     // 8. Mengambil data sebanyak $limit mulai dari $offset
      $query = "
-          SELECT movies.*, GROUP_CONCAT(categories.name SEPARATOR ', ') AS categories FROM movies
+          SELECT movies.*
+          FROM movies
           LEFT JOIN movie_categories ON movies.id = movie_categories.movie_id
           LEFT JOIN categories ON movie_categories.category_id = categories.id
           GROUP BY movies.id
@@ -164,15 +151,14 @@ function getMovies($order = 'latest', $limit = 6, $offset = 0)
                'id' => $row['id'],
                'name' => $row['name'],
                'release_date' => $row['release_date'],
-               'poster_path' => $row['poster_path'],
-               'categories' => $row['categories']
+               'poster_path' => $row['poster_path']
           ];
      }
 
      return $movies;
 }
 
-// Query untuk menghitung total film
+// Function untuk menghitung total film
 function countTotalMovies()
 {
      global $conn;
@@ -183,16 +169,17 @@ function countTotalMovies()
      return $row['total'];
 }
 
+// Function untuk menghitung total film dengan nama yang dicari
 function countTotalMoviesWithSearch($search = "")
 {
      global $conn;
      $search = "%$search%";
      $query = "
-        SELECT COUNT(DISTINCT movies.id) AS total FROM movies
-        LEFT JOIN movie_categories ON movies.id = movie_categories.movie_id
-        LEFT JOIN categories ON movie_categories.category_id = categories.id
-        WHERE movies.name LIKE ?
-    ";
+          SELECT COUNT(DISTINCT movies.id) AS total FROM movies
+          LEFT JOIN movie_categories ON movies.id = movie_categories.movie_id
+          LEFT JOIN categories ON movie_categories.category_id = categories.id
+          WHERE movies.name LIKE ?
+     ";
      $stmt = $conn->prepare($query);
      $stmt->bind_param('s', $search);
      $stmt->execute();
@@ -201,13 +188,14 @@ function countTotalMoviesWithSearch($search = "")
      return $row['total'];
 }
 
-
+// FFunction untuk mencari film berdasarkan judul
 function getMovieWithSearch($search = "", $limit = 3, $offset = 0)
 {
      global $conn;
      $search = "%$search%";
      $query = "
-          SELECT movies.*, GROUP_CONCAT(categories.name SEPARATOR ', ') AS categories FROM movies
+          SELECT movies.*
+          FROM movies
           LEFT JOIN movie_categories ON movies.id = movie_categories.movie_id
           LEFT JOIN categories ON movie_categories.category_id = categories.id
           WHERE movies.name LIKE ?
@@ -225,21 +213,14 @@ function getMovieWithSearch($search = "", $limit = 3, $offset = 0)
      return $movies;
 }
 
-
+// Function untuk mengambil film berdasarkan ID untuk masuk ke halaman detail film
 function getMovieById($id)
 {
      global $conn;
 
-     // Cara baca querynya adalah:
-     // 1. Memilih semua kolom dari tabel movies
-     // 2. Menggabungkan nama-nama kategori yang terikat dengan sebuah film menjadi satu string dengan pemisah ', ' dan memberikan alias 'categories'
-     // 3. Mengambil data dari tabel movies
-     // 4. Menggabungkan tabel movies dengan tabel movie_categories menggunakan LEFT JOIN
-     // 5. Menggabungkan tabel movie_categories dengan tabel categories menggunakan LEFT JOIN
-     // 6. Mengambil data film dengan id yang sesuai
-     // 7. Mengelompokkan data berdasarkan id film     
      $query = "
-          SELECT movies.*, GROUP_CONCAT(categories.name SEPARATOR ', ') AS categories FROM movies
+          SELECT movies.*, GROUP_CONCAT(categories.name SEPARATOR ', ') AS categories, GROUP_CONCAT(categories.id SEPARATOR ', ') AS category_ids 
+          FROM movies
           LEFT JOIN movie_categories ON movies.id = movie_categories.movie_id
           LEFT JOIN categories ON movie_categories.category_id = categories.id
           WHERE movies.id = ?
@@ -252,12 +233,14 @@ function getMovieById($id)
      return $result->fetch_assoc();
 }
 
-function getMoviesByCategories($categories, $exclude_movie_id)
+// Function untuk mengambil film yang memiliki kategori yang sama dengan film yang sedang dilihat
+function getRelatedMovies($categories, $exclude_movie_id)
 {
      global $conn;
      $category_placeholders = implode(',', array_fill(0, count($categories), '?'));
      $query = "
-          SELECT movies.*, GROUP_CONCAT(categories.name SEPARATOR ', ') AS categories FROM movies
+          SELECT movies.*
+          FROM movies
           LEFT JOIN movie_categories ON movies.id = movie_categories.movie_id
           LEFT JOIN categories ON movie_categories.category_id = categories.id
           WHERE categories.name IN ($category_placeholders) AND movies.id != ?
@@ -278,16 +261,52 @@ function getMoviesByCategories($categories, $exclude_movie_id)
      return $movies;
 }
 
-
-
+// Function untuk mengambil semua kategori diurutkan berdasarkan nama ASC
 function getCategories()
 {
      global $conn;
-     $query = "SELECT * FROM categories";
+     $query = "SELECT * FROM categories ORDER BY name ASC";
      $result = $conn->query($query);
      $categories = [];
      while ($row = $result->fetch_assoc()) {
           $categories[] = $row;
      }
      return $categories;
+}
+
+// Function untuk mengambil kategori berdasarkan ID
+function getCategoryById($id)
+{
+     global $conn;
+
+     $stmt = $conn->prepare('SELECT * FROM categories WHERE id = ?');
+     $stmt->bind_param('i', $id);
+     $stmt->execute();
+     $result = $stmt->get_result();
+     $category = $result->fetch_assoc();
+     $stmt->close();
+
+     return $category;
+}
+
+// Function untuk mengambil film berdasarkan kategori
+function getMoviesByCategory($categoryId)
+{
+     global $conn;
+
+     $stmt = $conn->prepare('
+          SELECT movies.* 
+          FROM movies
+          JOIN movie_categories ON movies.id = movie_categories.movie_id
+          WHERE movie_categories.category_id = ?
+     ');
+     $stmt->bind_param('i', $categoryId);
+     $stmt->execute();
+     $result = $stmt->get_result();
+     $movies = [];
+     while ($row = $result->fetch_assoc()) {
+          $movies[] = $row;
+     }
+     $stmt->close();
+     return $movies;
 }

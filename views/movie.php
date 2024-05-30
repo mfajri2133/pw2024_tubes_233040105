@@ -25,7 +25,7 @@ $categories = fetchCategories();
           </div>
      </div>
 
-     <div class="sm:overflow-x-auto">
+     <div class="sm:overflow-x-auto md:overflow-x-auto lg:overflow-x-auto">
           <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
                <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400 ">
                     <tr>
@@ -78,7 +78,7 @@ $categories = fetchCategories();
                                              </div>
                                         </div>
                                    </td>
-                                   <td class="px-4 py-3 text-center w-32 sm:flex sm:justify-center sm:items-center sm:space-x-2 ">
+                                   <td class="px-4 py-3 text-center w-32">
                                         <button type="button" data-modal-target="editModal<?= $movie['id'] ?>" data-modal-show="editModal<?= $movie['id'] ?>" class="bg-green-600 rounded-full w-10 h-10 text-xs text-white">
                                              <i class="fa-solid fa-pen"></i>
                                         </button>
@@ -295,7 +295,7 @@ $categories = fetchCategories();
 
                          <div class="mb-4">
                               <label for="trailer_url" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Link Trailer (Youtube)</label>
-                              <input type="url" id="trailer_url" name="trailer_url" placeholder="https://example.com" pattern="https://.*" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                              <input type="url" id="trailer_url" name="trailer_url" placeholder="https://youtube.com" pattern="https://.*" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                          </div>
 
                          <div class="mb-4">
@@ -380,7 +380,7 @@ $categories = fetchCategories();
                                              <div class="text-base">${formatDate(movie.release_date)}</div>
                                         </div>
                                    </td>
-                                   <td class="px-4 py-3 text-center w-32 sm:flex sm:justify-center sm:items-center sm:space-x-2">
+                                   <td class="px-4 py-3 text-center w-32">
                                         <button type="button" data-modal-target="editModal${movie.id}" data-modal-show="editModal${movie.id}" class="bg-green-600 rounded-full w-10 h-10 text-xs text-white edit-button">
                                              <i class="fa-solid fa-pen"></i>
                                         </button>

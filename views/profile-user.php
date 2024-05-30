@@ -1,9 +1,24 @@
+<?php
+include_once '../helpers/users.php';
+
+// Cek apakah sesi telah dimulai
+if (session_status() == PHP_SESSION_NONE) {
+     session_start();
+}
+
+// Redirect ke halaman login jika pengguna belum login
+if (!isset($_SESSION['user'])) {
+     redirect_to("login");
+     exit();
+}
+
+include_once 'components/layout-user-top.php';
+?>
 <title>Profile | FWeb</title>
-<?php include_once 'components/layout-user-top.php' ?>
 
 
 
-<div class="bg-white  py-8 px-44 sm:px-8 min-h-full w-full ">
+<section class="bg-white  py-8 px-44 md:px-7 sm:px-8 min-h-full w-full">
      <div class="border-2 rounded-md mb-8">
           <div class="grid grid-cols-2 sm:grid-cols-1 p-6">
                <div class="sm:mb-4">
@@ -41,7 +56,6 @@
                               </form>
                          <?php endif; ?>
                     </div>
-
                </div>
           </div>
      </div>
@@ -102,12 +116,11 @@
                </div>
           </div>
      </div>
-</div>
+</section>
 
 
 
 <script src=<?= base_url('/js//password-toggle-hide.js') ?>></script>
 <script src=<?= base_url('/js/profile.js') ?>></script>
-
 
 <?php include_once 'components/layout-user-bottom.php' ?>

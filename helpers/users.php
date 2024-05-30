@@ -25,6 +25,21 @@ function redirect_to($view)
      exit();
 }
 
+function redirect_to_profile()
+{
+     if (isset($_SESSION['user_logged_in'])  && isset($_SESSION['user']['is_admin'])) {
+          if ($_SESSION['user']['is_admin'] == 1) {
+               header("Location: ../views/profile.php");
+          } else {
+               header("Location: ../views/profile-user.php");
+          }
+     } else {
+          header("Location: ../views/index.php");
+     }
+     exit();
+}
+
+
 function fetch_post_data()
 {
      if (isset($_SESSION["post_data"])) {

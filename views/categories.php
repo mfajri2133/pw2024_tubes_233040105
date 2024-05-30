@@ -7,7 +7,7 @@ $categories = getCategories();
 <title>FWeb - All Categories</title>
 
 
-<section class="bg-[#181a1b] h-[90vh] sm:h-max flex items-center ">
+<section class="bg-[#181a1b] min-h-screen">
      <div class="flex flex-row flex-wrap gap-4 justify-center py-10">
           <?php foreach ($categories as $category) : ?>
                <a href="movies_category.php?id=<?= $category['id'] ?>" class="w-80 sm:w-[25rem] bg-white text-black border border-gray-200 rounded-lg shadow-lg hover:text-[#007bff]">
@@ -19,6 +19,5 @@ $categories = getCategories();
      </div>
 </section>
 
-<?php include_once 'components/ajax-search.php'; ?>
 
 <?php include_once 'components/layout-user-bottom.php'; ?>

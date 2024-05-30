@@ -21,7 +21,7 @@ $users = fetchUsers();
           </div>
      </div>
 
-     <div class="sm:overflow-x-auto">
+     <div class="sm:overflow-x-auto md:overflow-x-auto lg:overflow-x-auto">
           <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
                <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400 ">
                     <tr>
@@ -53,11 +53,11 @@ $users = fetchUsers();
                                              <img class="w-10 h-10 rounded-full object-cover" src="<?= base_url('/uploads/profile-pict/default-user-picture.png') ?>" alt="Profile image">
                                         <?php endif; ?>
                                         <div class="ps-3">
-                                             <div class="text-base "><?= $user['name'] ?></div>
+                                             <div class="text-base text-wrap"><?= $user['name'] ?></div>
                                         </div>
                                    </td>
                                    <td class="px-6 py-3 bg-gray-50 border-r w-64 sm:w-72">
-                                        <div class="font-normal text-gray-500"><?= $user['username'] ?></div>
+                                        <div class="font-normal text-wrap text-gray-500"><?= $user['username'] ?></div>
                                    </td>
                                    <td class="px-4 py-3 text-center w-24">
                                         <button type="button" data-modal-target="deleteModal<?= $user['id'] ?>" data-modal-show="deleteModal<?= $user['id'] ?>" class="bg-red-600 w-10 h-10 text-xs rounded-full text-white">
@@ -143,11 +143,11 @@ $users = fetchUsers();
                                         <td class="px-6 py-4 flex items-center text-gray-900 whitespace-nowrap dark:text-white border-r sm:w-72">
                                              <img class="w-10 h-10 rounded-full object-cover" src="${user.img_profile_path ? '<?= base_url() ?>' + user.img_profile_path : '../uploads/profile-pict/default-user-picture.png'}" alt="Profile image">
                                                   <div class="ps-3">
-                                                       <div class="text-base ">${user.name}</div>
+                                                       <div class="text-base text-wrap">${user.name}</div>
                                                   </div>
                                         </td>
                                         <td class="px-6 py-4 bg-gray-50 border-r sm:w-72">
-                                             <div class="font-normal text-gray-500">${user.username}</div>
+                                             <div class="font-normal text-wrap text-gray-500">${user.username}</div>
                                         </td>
                                         <td class="px-4 py-4 text-center w-24">
                                              ${user.id == <?= $_SESSION['user']['id'] ?> ? 
