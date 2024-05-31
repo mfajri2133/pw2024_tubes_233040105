@@ -13,7 +13,7 @@ $movies = getMovies($current_page);
      <div class="px-4 mx-auto max-w-screen-xl text-center ">
           <h1 class="mb-4 text-6xl font-extrabold tracking-tight leading-none text-white md:text-5xl sm:text-3xl  poppins">Experience the Magic of <p class="text-[#007bff]">Movie.</p>
           </h1>
-          <p class="mb-8 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48">
+          <p class="mb-8 text-lg font-normal text-gray-300 lg:text-xl sm:px-10 lg:px-48">
                At FWeb Movie, we bring you movie details and reviews. Discover the latest blockbusters, timeless classics, and hidden gems that will awaken your passion for movies. Join us and dive into the world of cinema, where every story comes alive.
           </p>
      </div>
@@ -31,7 +31,11 @@ $movies = getMovies($current_page);
                <?php if (!empty($movies)) : ?>
                     <?php foreach ($movies as $movie) : ?>
                          <a href=" movie_detail.php?id=<?= $movie['id'] ?>" class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-lg ">
-                              <img class="rounded-t-lg w-full h-64 object-cover" src="<?= base_url($movie['poster_path']) ?>" alt="<?= $movie['name'] ?>" />
+                              <?php if ($movie['poster_path'] !== null) : ?>
+                                   <img class="rounded-t-lg w-full object-cover h-64" src="<?= base_url($movie['poster_path']) ?>" alt="<?= htmlspecialchars($movie['name']) ?>" />
+                              <?php else : ?>
+                                   <img class="rounded-t-lg w-full object-cover h-64" src="<?= base_url('/uploads/movie-posters/default-poster-picture.png') ?>" alt="Movie Poster">
+                              <?php endif; ?>
                               <div class="p-3 text-center">
                                    <h3 class=" text-base font-bold tracking-tight text-gray-900 line-clamp-1"><?= $movie['name'] ?></h3>
                                    <p class="text-sm font-medium text-gray-900 ">(<?= date('Y', strtotime($movie['release_date'])) ?>)</p>

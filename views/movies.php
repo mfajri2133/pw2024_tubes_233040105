@@ -18,13 +18,17 @@ $total_pages = ceil($total_movies / $limit);
 
 <section class="bg-[#181a1b] p-7 min-h-screen">
      <div class="container mx-auto">
-          <h1 class="text-white text-3xl mb-5">Movie Collection</h1>
+          <h1 class="text-white text-3xl mb-5 font-semibold text-center">All Movie Collection</h1>
 
           <div class="grid sm:grid-cols-2 grid-cols-6 md:grid-cols-4 gap-6 sm:gap-4 mb-5">
                <?php if (!empty($movies)) : ?>
                     <?php foreach ($movies as $movie) : ?>
                          <a href=" movie_detail.php?id=<?= $movie['id'] ?>" class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-lg ">
-                              <img class="rounded-t-lg w-full h-64 object-cover" src="<?= base_url($movie['poster_path']) ?>" alt="<?= $movie['name'] ?>" />
+                              <?php if ($movie['poster_path'] !== null) : ?>
+                                   <img class="rounded-t-lg w-full object-cover h-64" src="<?= base_url($movie['poster_path']) ?>" alt="<?= htmlspecialchars($movie['name']) ?>" />
+                              <?php else : ?>
+                                   <img class="rounded-t-lg w-full object-cover h-64" src="<?= base_url('/uploads/movie-posters/default-poster-picture.png') ?>" alt="Movie Poster">
+                              <?php endif; ?>
                               <div class="p-3 text-center">
                                    <h3 class=" text-base font-bold tracking-tight text-gray-900 line-clamp-1"><?= $movie['name'] ?></h3>
                                    <p class="text-sm font-medium text-gray-900 ">(<?= date('Y', strtotime($movie['release_date'])) ?>)</p>

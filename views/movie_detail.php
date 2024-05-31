@@ -65,7 +65,11 @@ $trailer_url = convertToEmbedURL($movie['trailer_url']);
      </div>
 
      <div class="flex items-center justify-center gap-4 sm:grid sm:grid-cols-1 mb-3">
-          <img class="w-[304px] h-[456px] sm:w-full sm:h-[515px] object-cover" src="<?= base_url($movie['poster_path']) ?>" alt="<?= htmlspecialchars($movie['name']) ?>">
+          <?php if ($movie['poster_path'] !== null) : ?>
+               <img class="w-[304px] h-[456px] sm:w-full sm:h-[515px] object-cover" src="<?= base_url($movie['poster_path']) ?>" alt="<?= htmlspecialchars($movie['name']) ?>">
+          <?php else : ?>
+               <img class="w-[304px] h-[456px] sm:w-full sm:h-[515px] object-cover" src="<?= base_url('/uploads/movie-posters/default-poster-picture.png') ?>" alt="Movie Poster">
+          <?php endif; ?>
           <iframe class="w-[900px] h-[456px] sm:w-full sm:h-[315px]" src="<?= $trailer_url ?>" frameborder="0" allowfullscreen></iframe>
      </div>
 
@@ -99,12 +103,22 @@ $trailer_url = convertToEmbedURL($movie['trailer_url']);
 
 <section class="bg-[#181a1b] p-4">
      <div class="container mx-auto">
-          <h2 class="mb-4 text-2xl font-bold text-white">Same Movie Category</h2>
+          <div class="flex justify-between items-center mb-4">
+               <h2 class="text-2xl sm:text-lg font-bold text-white">Same Movie Category</h2>
+               <a href="<?= base_url('/views/movies.php') ?>" class="bg-[#007bff] py-2 px-3 text-base font-bold rounded-full text-white flex items-center justify-center">
+                    See All Movies
+               </a>
+          </div>
+
           <div class="grid sm:grid-cols-2 grid-cols-6 md:grid-cols-3 gap-6 sm:gap-4">
                <?php if (!empty($related_movies)) : ?>
                     <?php foreach ($related_movies as $related_movie) : ?>
                          <a href="movie_detail.php?id=<?= $related_movie['id'] ?>" class="max-w-sm bg-white border border-white rounded-lg shadow-lg ">
-                              <img class="rounded-t-lg w-full object-cover h-64" src="<?= base_url($related_movie['poster_path']) ?>" alt="<?= htmlspecialchars($related_movie['name']) ?>" />
+                              <?php if ($related_movie['poster_path'] !== null) : ?>
+                                   <img class="rounded-t-lg w-full object-cover h-64" src="<?= base_url($related_movie['poster_path']) ?>" alt="<?= htmlspecialchars($related_movie['name']) ?>" />
+                              <?php else : ?>
+                                   <img class="rounded-t-lg w-full object-cover h-64" src="<?= base_url('/uploads/movie-posters/default-poster-picture.png') ?>" alt="Movie Poster">
+                              <?php endif; ?>
                               <div class="p-3 text-center">
                                    <h3 class="text-base font-bold tracking-tight text-gray-900 line-clamp-1"><?= htmlspecialchars($related_movie['name']) ?></h3>
                                    <p class=" text-sm font-medium text-gray-900 ">(<?= date('Y', strtotime($related_movie['release_date'])) ?>)</p>

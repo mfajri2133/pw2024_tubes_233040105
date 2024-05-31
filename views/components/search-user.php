@@ -24,7 +24,11 @@
                                         var movieCard = `
                               <a href="movie_detail.php?id=${movie.id}" class="block p-3 hover:bg-gray-200">
                                    <div class="flex items-center">
+                                   <?php if (!empty($movie['poster_path'])) : ?>
                                         <img class="w-10 h-10 object-cover rounded" src="<?= base_url('${movie.poster_path}') ?>" alt="${movie.name}" />
+                                   <?php else : ?>
+                                        <img class="w-10 h-10 object-cover rounded" src="../../uploads/movie_posters/default-poster-picture.png" alt="Movie Poster" />
+                                   <?php endif; ?>
                                         <div class="ml-3">
                                              <h3 class="text-sm font-bold line-clamp-2">${movie.name} (${new Date(movie.release_date).getFullYear()})</h3>
                                         </div>

@@ -129,6 +129,13 @@ function getMovies($order = 'latest', $limit = 6, $offset = 0)
           $order_by = "";
      }
 
+     // Cara membaca query:
+     // 1. Ambil semua data dari tabel movies
+     // 2. Gabungkan tabel movies dengan tabel movie_categories berdasarkan id film
+     // 3. Gabungkan tabel movie_categories dengan tabel categories berdasarkan id kategori
+     // 4. Kelompokkan data berdasarkan id film
+     // 5. Urutkan data berdasarkan tanggal rilis
+     // 6. Ambil data sebanyak $limit mulai dari data ke-$offset
      $query = "
           SELECT movies.*
           FROM movies
@@ -163,6 +170,7 @@ function countTotalMovies()
 {
      global $conn;
 
+     // Query untuk menghitung total film
      $query = "SELECT COUNT(*) AS total FROM movies";
      $result = $conn->query($query);
      $row = $result->fetch_assoc();
@@ -174,12 +182,20 @@ function countTotalMoviesWithSearch($search = "")
 {
      global $conn;
      $search = "%$search%";
+
+     // Cara membaca query:
+     // 1. Hitung jumlah total film, distict itu untuk menghindari data yang sama. di inisialisasi dengan alias total
+     // 2. Ambil data dari tabel movies
+     // 3. Gabungkan tabel movies dengan tabel movie_categories berdasarkan id film
+     // 4. Gabungkan tabel movie_categories dengan tabel categories berdasarkan id kategori
+     // 5. Filter data dimana nama film sesuai dengan search query yang diisi user
      $query = "
           SELECT COUNT(DISTINCT movies.id) AS total FROM movies
           LEFT JOIN movie_categories ON movies.id = movie_categories.movie_id
           LEFT JOIN categories ON movie_categories.category_id = categories.id
           WHERE movies.name LIKE ?
      ";
+
      $stmt = $conn->prepare($query);
      $stmt->bind_param('s', $search);
      $stmt->execute();
@@ -193,6 +209,14 @@ function getMovieWithSearch($search = "", $limit = 3, $offset = 0)
 {
      global $conn;
      $search = "%$search%";
+
+     // Cara membaca query:
+     // 1. Ambil semua data dari tabel movies
+     // 2. Gabungkan tabel movies dengan tabel movie_categories berdasarkan id film
+     // 3. Gabungkan tabel movie_categories dengan tabel categories berdasarkan id kategori
+     // 4. Filter data dimana nama film sesuai dengan search query yang diisi user
+     // 5. Kelompokkan data berdasarkan id film
+     // 6. Ambil data sebanyak $limit mulai dari data ke-$offset
      $query = "
           SELECT movies.*
           FROM movies
@@ -218,6 +242,12 @@ function getMovieById($id)
 {
      global $conn;
 
+     // Cara membaca query:
+     // 1. Ambil semua data dari tabel movies, dan categories namenya digabungkan dengan fungsi GROUP_CONCAT
+     // 2. Gabungkan tabel movies dengan tabel movie_categories berdasarkan id film
+     // 3. Gabungkan tabel movie_categories dengan tabel categories berdasarkan id kategori
+     // 4. Filter data dimana id film sesuai dengan id
+     // 5. Kelompokkan data berdasarkan id film
      $query = "
           SELECT movies.*, GROUP_CONCAT(categories.name SEPARATOR ', ') AS categories, GROUP_CONCAT(categories.id SEPARATOR ', ') AS category_ids 
           FROM movies
@@ -234,10 +264,20 @@ function getMovieById($id)
 }
 
 // Function untuk mengambil film yang memiliki kategori yang sama dengan film yang sedang dilihat
+
 function getRelatedMovies($categories, $exclude_movie_id)
 {
      global $conn;
      $category_placeholders = implode(',', array_fill(0, count($categories), '?'));
+
+     // Cara membaca query:
+     // 1. Ambil semua data dari tabel movies
+     // 2. Gabungkan tabel movies dengan tabel movie_categories berdasarkan id film
+     // 3. Gabungkan tabel movie_categories dengan tabel categories berdasarkan id kategori
+     // 4. Filter data dimana nama kategori ada di dalam array categories di sebuah film dan id film tidak sama dengan id film yang sedang dilihat
+     // 5. Kelompokkan data berdasarkan id film
+     // 6. Acak data
+     // 7. Ambil data sebanyak 6
      $query = "
           SELECT movies.*
           FROM movies
@@ -294,6 +334,10 @@ function getMoviesByCategory($categoryId)
 {
      global $conn;
 
+     // Cara membaca query:
+     // 1. Ambil semua data dari tabel movies
+     // 2. Gabungkan tabel movies dengan tabel movie_categories berdasarkan id film
+     // 3. Filter data dimana id kategori sesuai dengan id kategori yang dipilih
      $stmt = $conn->prepare('
           SELECT movies.* 
           FROM movies

@@ -13,6 +13,13 @@
 
                <div class="border-2 rounded-md sm:border-none sm:rounded-none">
                     <div class="p-5 sm:p-0">
+                         <div class="mb-4">
+                              <?php if (isset($_SESSION['user']['img_profile_path']) && !empty($_SESSION['user']['img_profile_path'])) : ?>
+                                   <img class="w-48 mx-auto h-48 rounded-full object-cover" src=<?= base_url($_SESSION['user']['img_profile_path']) ?> alt="user photo">
+                              <?php else : ?>
+                                   <img class="w-48 mx-auto h-48 rounded-full object-cover" src=<?= base_url("/uploads/profile-pict/default-user-picture.png") ?> alt="Profile image">
+                              <?php endif; ?>
+                         </div>
                          <form action=<?= base_url("/controller/profile.php?action=update") ?> method="POST" enctype="multipart/form-data">
                               <div class="mb-4">
                                    <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>

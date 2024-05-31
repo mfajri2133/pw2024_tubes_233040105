@@ -60,7 +60,11 @@ $categories = fetchCategories();
                               <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                    <td class="px-6 py-3 text-gray-900 whitespace-nowrap dark:text-white border-r w-40 sm:w-72">
                                         <div>
-                                             <img src="<?= base_url($movie['poster_path'])  ?>" alt="Poster">
+                                             <?php if ($movie['poster_path'] != null) : ?>
+                                                  <img src="<?= base_url($movie['poster_path'])  ?>" alt="Poster">
+                                             <?php else : ?>
+                                                  <img src="<?= base_url('/uploads/movie-posters/default-poster-picture.png')  ?>" alt="Poster">
+                                             <?php endif; ?>
                                         </div>
                                    </td>
                                    <td class="px-6 py-3 text-gray-900 whitespace-nowrap dark:text-white border-r w-64 sm:w-72">
@@ -79,7 +83,7 @@ $categories = fetchCategories();
                                         </div>
                                    </td>
                                    <td class="px-4 py-3 text-center w-32">
-                                        <button type="button" data-modal-target="editModal<?= $movie['id'] ?>" data-modal-show="editModal<?= $movie['id'] ?>" class="bg-green-600 rounded-full w-10 h-10 text-xs text-white">
+                                        <button type="button" data-modal-target="editModal<?= $movie['id'] ?>" data-modal-show="editModal<?= $movie['id'] ?>" class="bg-green-600 rounded-full w-10 h-10 text-xs text-white md:mb-3 sm:mb-3">
                                              <i class="fa-solid fa-pen"></i>
                                         </button>
                                         <button type="button" data-modal-target="deleteModal<?= $movie['id'] ?>" data-modal-show="deleteModal<?= $movie['id'] ?>" class="bg-red-600 rounded-full w-10 h-10 text-xs text-white">
@@ -203,8 +207,8 @@ $categories = fetchCategories();
                                                        </div>
 
                                                        <div class="mb-4">
-                                                            <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Movie Description</label>
-                                                            <textarea id="description" name="description" rows="4" required class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write description movie here..."><?= htmlspecialchars($movie['description']) ?></textarea>
+                                                            <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Movie Synopsis</label>
+                                                            <textarea id="description" name="description" rows="4" required class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write movie synopsis here..."><?= htmlspecialchars($movie['description']) ?></textarea>
                                                        </div>
 
                                                        <div class="flex justify-end">
@@ -299,8 +303,8 @@ $categories = fetchCategories();
                          </div>
 
                          <div class="mb-4">
-                              <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Movie Description</label>
-                              <textarea id="description" required name="description" rows="4" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write description movie here..."></textarea>
+                              <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Movie Synopsis</label>
+                              <textarea id="description" required name="description" rows="4" class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write movie synopsis here..."></textarea>
                          </div>
 
                          <div class="flex justify-end">
@@ -367,7 +371,7 @@ $categories = fetchCategories();
                               <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                    <td class="px-6 py-3 text-gray-900 whitespace-nowrap dark:text-white border-r w-40 sm:w-72">
                                         <div>
-                                             <img src="${movie.poster_path ? '<?= base_url() ?>' + movie.poster_path : '<?= base_url('/uploads/profile-pict/default-user-picture.png') ?>'}" alt="Movie Poster" >
+                                             <img src="${movie.poster_path ? '<?= base_url() ?>' + movie.poster_path : '<?= base_url('/uploads/movie-posters/default-poster-picture.png') ?>'}" alt="Movie Poster" >
                                         </div>
                                    </td>
                                    <td class="px-6 py-3 text-gray-900 whitespace-nowrap dark:text-white border-r w-64 sm:w-72">
