@@ -17,7 +17,7 @@ $total_pages = ceil($total_movies / $limit);
 
 
      <div class="container mx-auto">
-          <h1 class="text-white text-3xl mb-5">Search Results for "<?= htmlspecialchars($query) ?>"</h1>
+          <h1 class="text-white text-4xl mb-5">Search Results for "<?= htmlspecialchars($query) ?>"</h1>
 
           <div id="movies-container" class="grid sm:grid-cols-2 grid-cols-6 md:grid-cols-4 gap-6 sm:gap-4 mb-5">
                <?php if (count($movies) > 0) : ?>
@@ -36,7 +36,7 @@ $total_pages = ceil($total_movies / $limit);
                          </a>
                     <?php endforeach; ?>
                <?php else : ?>
-                    <p class="text-white col-span-6 text-center">No movies found.</p>
+                    <p class="text-white col-span-6 sm:col-span-2 md:col-span-4 text-center text-3xl">No movies found.</p>
                <?php endif; ?>
           </div>
 

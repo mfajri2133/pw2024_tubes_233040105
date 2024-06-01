@@ -14,13 +14,24 @@ if (login_check()) {
 <head>
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
      <title>Sign in | FWeb</title>
      <link rel="stylesheet" href="<?= base_url("/css/output.css") ?>">
+     <link rel="stylesheet" href="<?= base_url("/css/support.css") ?>">
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&family=Mochiy+Pop+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
-     <div class="bg-gray-100 flex items-center justify-center h-screen">
+     <div class="bg-[#181a1b] flex flex-col items-center justify-center px-5 h-screen">
+          <div class="text-center mb-4">
+               <a href="<?= base_url("/views/index.php") ?>" class="">
+                    <span class="self-center text-3xl font-bold dark:text-white text-[#007bff] mochiy">F<span class="text-white karla">Movie</span></span>
+               </a>
+          </div>
+
           <div class="bg-white shadow-md rounded-md p-8 max-w-md w-full sm:m-4">
                <h2 class="text-2xl font-bold mb-6 text-center ">Sign in</h2>
 

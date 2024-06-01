@@ -117,7 +117,7 @@ function is_username_exists($username)
 }
 
 // Function get movies untuk dihalaman user/landing page
-function getMovies($order = 'latest', $limit = 6, $offset = 0)
+function getMovies($order = 'latest', $limit = 12, $offset = 0)
 {
      global $conn;
 

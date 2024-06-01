@@ -27,7 +27,7 @@
                                    <?php if (!empty($movie['poster_path'])) : ?>
                                         <img class="w-10 h-10 object-cover rounded" src="<?= base_url('${movie.poster_path}') ?>" alt="${movie.name}" />
                                    <?php else : ?>
-                                        <img class="w-10 h-10 object-cover rounded" src="../../uploads/movie_posters/default-poster-picture.png" alt="Movie Poster" />
+                                        <img class="w-10 h-10 object-cover rounded" src="<?= base_url('/uploads/movie-posters/default-poster-picture.png') ?>" alt="Movie Poster" />
                                    <?php endif; ?>
                                         <div class="ml-3">
                                              <h3 class="text-sm font-bold line-clamp-2">${movie.name} (${new Date(movie.release_date).getFullYear()})</h3>
@@ -56,6 +56,14 @@
                     $('#search-results').addClass('hidden');
                } else {
                     $('#search-results').removeClass('hidden');
+               }
+          });
+
+          $('#search-form').on('submit', function(event) {
+               event.preventDefault();
+               var query = $('#movie-search').val();
+               if (query.length > 0) {
+                    window.location.href = 'search_results.php?query=' + query;
                }
           });
      });

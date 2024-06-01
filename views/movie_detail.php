@@ -39,7 +39,7 @@ $trailer_url = convertToEmbedURL($movie['trailer_url']);
 <?php include_once 'components/layout-user-top.php'; ?>
 <title><?= htmlspecialchars($movie['name']) ?> - FWeb</title>
 
-<section class=" bg-[#181a1b] px-40 sm:px-6 md:px-8 sm:py-7 py-8">
+<section class=" bg-[#181a1b] px-40 sm:px-6 md:px-8 sm:py-7 py-8 poppins">
      <div class="flex justify-between">
           <div>
                <h1 class="mb-3 text-4xl sm:text-3xl font-extrabold tracking-tight leading-none text-white poppins"><?= htmlspecialchars($movie['name']) ?></h1>

@@ -87,7 +87,7 @@ function upload_img($username, $name)
      $real_file_name = $upload_dir . 'profile.' . $file_extension;
 
      // Ekstensi dan ukuran file yang diperbolehkan
-     $allowed_extensions = array('jpg', 'jpeg', 'png');
+     $allowed_extensions = array('jpg', 'jpeg');
 
      if (in_array($file_extension, $allowed_extensions) && $file_size <= 5 * 1024 * 1024) {
           // Hapus file lama dengan nama yang sama namun ekstensi berbeda

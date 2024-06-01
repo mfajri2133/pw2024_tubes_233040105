@@ -18,14 +18,10 @@ if (!$category) {
 ?>
 <title>FWeb - <?= htmlspecialchars($category['name']) ?> Movies</title>
 
-<section class="bg-[#181a1b] min-h-screen p-7">
+<section class="bg-[#181a1b] min-h-screen p-6">
      <div class="container mx-auto">
-          <div class="flex justify-between items-center mb-8">
-               <h1 class="text-4xl font-bold text-white "><?= htmlspecialchars($category['name']) ?> Movies</h1>
-               <a href="<?= base_url('/views/movies.php') ?>" class="bg-[#007bff] py-2 px-3 text-base font-bold rounded-full text-white flex items-center justify-center">
-                    See All Movies
-               </a>
-          </div>
+          <h1 class="text-4xl font-bold text-center text-white mb-8"><?= htmlspecialchars($category['name']) ?> Movies</h1>
+
           <div class="grid sm:grid-cols-2 grid-cols-6 md:grid-cols-4 gap-6 sm:gap-4 mb-5">
                <?php if (!empty($movies)) : ?>
                     <?php foreach ($movies as $movie) : ?>
@@ -42,7 +38,7 @@ if (!$category) {
                          </a>
                     <?php endforeach; ?>
                <?php else : ?>
-                    <p class="text-white cols-col-span-6 sm:col-span-2 md:col-span-4">Tidak ada movies</p>
+                    <p class="text-white cols-col-span-6 sm:col-span-2 md:col-span-4 text-3xl">Tidak ada movies</p>
                <?php endif; ?>
           </div>
      </div>
