@@ -354,3 +354,34 @@ function getMoviesByCategory($categoryId)
      $stmt->close();
      return $movies;
 }
+
+function getMovieYears()
+{
+     global $conn;
+     $query = "SELECT DISTINCT YEAR(release_date) AS year FROM movies ORDER BY year DESC";
+     $result = mysqli_query($conn, $query);
+
+     $years = [];
+     while ($row = mysqli_fetch_assoc($result)) {
+          $years[] = $row['year'];
+     }
+
+     return $years;
+}
+
+function getMoviesByYear($year)
+{
+     global $conn;
+     $query = "SELECT * FROM movies WHERE YEAR(release_date) = ? ORDER BY release_date DESC";
+     $stmt = $conn->prepare($query);
+     $stmt->bind_param("i", $year);
+     $stmt->execute();
+     $result = $stmt->get_result();
+
+     $movies = [];
+     while ($row = $result->fetch_assoc()) {
+          $movies[] = $row;
+     }
+
+     return $movies;
+}

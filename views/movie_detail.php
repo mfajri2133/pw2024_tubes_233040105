@@ -81,7 +81,7 @@ $trailer_url = convertToEmbedURL($movie['trailer_url']);
                $category_ids = explode(', ', $movie['category_ids']);
                foreach ($categories as $index => $category) {
                     $category_id = $category_ids[$index];
-                    echo "<a href='movies_category.php?id=$category_id' class='inline-block bg-[#fff] rounded-full px-3 py-1 mb-1.5 border border-[#007bff] text-sm font-semibold text-[#007bff] mr-1.5'>$category</a>";
+                    echo "<a href='movies_by_category.php?id=$category_id' class='inline-block bg-[#fff] rounded-full px-3 py-1 mb-1.5 border border-[#007bff] text-sm font-semibold text-[#007bff] mr-1.5'>$category</a>";
                }
                ?>
           </div>

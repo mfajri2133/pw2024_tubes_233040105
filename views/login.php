@@ -63,6 +63,9 @@ if (login_check()) {
                <p class="mt-4 text-sm text-gray-600 text-center">Don’t have an account yet? <a href="register.php" class="text-indigo-600 hover:text-indigo-500">Sign up</a></p>
           </div>
      </div>
+
+     <?php include_once 'components/footer.php' ?>
+
 </body>
 
 <script src=<?= base_url("/js/password-toggle-hide.js") ?>></script>

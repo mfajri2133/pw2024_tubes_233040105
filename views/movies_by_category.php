@@ -20,7 +20,7 @@ if (!$category) {
 
 <section class="bg-[#181a1b] min-h-screen p-6">
      <div class="container mx-auto">
-          <h1 class="text-4xl font-bold text-center text-white mb-8"><?= htmlspecialchars($category['name']) ?> Movies</h1>
+          <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-3xl sm:text-2xl poppins text-center"><?= htmlspecialchars($category['name']) ?> Movies</h1>
 
           <div class="grid sm:grid-cols-2 grid-cols-6 md:grid-cols-4 gap-6 sm:gap-4 mb-5">
                <?php if (!empty($movies)) : ?>
@@ -38,7 +38,7 @@ if (!$category) {
                          </a>
                     <?php endforeach; ?>
                <?php else : ?>
-                    <p class="text-white cols-col-span-6 sm:col-span-2 md:col-span-4 text-3xl">Tidak ada movies</p>
+                    <p class="text-white col-span-6 text-center  text-xl">No movies found.</p>
                <?php endif; ?>
           </div>
      </div>

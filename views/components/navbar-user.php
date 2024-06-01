@@ -8,6 +8,7 @@
                <div class="uppercase text-white font-medium text-sm poppins">
                     <a href="<?= base_url('/views/movies.php') ?>" class=" tracking-widest mx-3 sm:hidden ">All Movies</a>
                     <a href="<?= base_url('/views/categories.php') ?>" class=" mx-3 tracking-widest sm:hidden ">Categories</a>
+                    <a href="<?= base_url('/views/years.php') ?>" class=" mx-3 tracking-widest sm:hidden ">Years</a>
                </div>
 
                <?php if (login_check()) : ?>
@@ -62,7 +63,7 @@
           </div>
 
           <div class="sm:order-last sm:w-full sm:mt-2.5">
-               <form id="search-form" class="m-0 md:w-[270px] sm:w-full w-[500px]">
+               <form id="search-form" class="m-0 md:w-[200px] sm:w-full w-[500px]">
                     <div class="relative">
                          <div class="absolute inset-y-0 start-0 flex items-center ps-3">
                               <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -79,8 +80,9 @@
 
           <div class="items-center justify-between hidden sm:w-full sm:mt-4" id="navbar-sticky">
                <ul class="flex w-full sm:flex-col  py-0 gap-4  justify-center lg:items-center content-center bg-[#181a1b]  rtl:space-x-reverse flex-row ">
-                    <a href="<?= base_url('/views/movies.php') ?>" class="hover:text-[#007bff] tracking-widest text-center hidden uppercase text-white font-medium  text-sm poppins sm:block">All Movies</a>
-                    <a href="<?= base_url('/views/categories.php') ?>" class=" hover:text-[#007bff] text-center tracking-widest hidden uppercase text-white font-medium  text-sm poppins sm:block">Categories</a>
+                    <a href="<?= base_url('/views/movies.php') ?>" class=" tracking-widest text-center hidden uppercase text-white font-medium  text-sm poppins sm:block">All Movies</a>
+                    <a href="<?= base_url('/views/categories.php') ?>" class="  text-center tracking-widest hidden uppercase text-white font-medium  text-sm poppins sm:block">Categories</a>
+                    <a href="<?= base_url('/views/years.php') ?>" class="  text-center tracking-widest hidden uppercase text-white font-medium  text-sm poppins sm:block">Years</a>
                </ul>
           </div>
      </div>

@@ -21,22 +21,19 @@
                                    resultsContainer.append('<p class="text-black p-3">No movies found.</p>');
                               } else {
                                    response.forEach(function(movie) {
+                                        var posterUrl = movie.poster_path ? '<?= base_url('') ?>' + movie.poster_path : '<?= base_url('/uploads/movie-posters/default-poster-picture.png') ?>';
                                         var movieCard = `
-                              <a href="movie_detail.php?id=${movie.id}" class="block p-3 hover:bg-gray-200">
-                                   <div class="flex items-center">
-                                   <?php if (!empty($movie['poster_path'])) : ?>
-                                        <img class="w-10 h-10 object-cover rounded" src="<?= base_url('${movie.poster_path}') ?>" alt="${movie.name}" />
-                                   <?php else : ?>
-                                        <img class="w-10 h-10 object-cover rounded" src="<?= base_url('/uploads/movie-posters/default-poster-picture.png') ?>" alt="Movie Poster" />
-                                   <?php endif; ?>
-                                        <div class="ml-3">
-                                             <h3 class="text-sm font-bold line-clamp-2">${movie.name} (${new Date(movie.release_date).getFullYear()})</h3>
-                                        </div>
-                                   </div>
-                              </a>`;
+                                             <a href="movie_detail.php?id=${movie.id}" class="block p-3 hover:bg-gray-200">
+                                                  <div class="flex items-center">
+                                                       <img class="w-10 h-10 object-cover rounded" src="${posterUrl}" alt="${movie.name}" />
+                                                       <div class="ml-3">
+                                                            <h3 class="text-sm font-bold line-clamp-2">${movie.name} (${new Date(movie.release_date).getFullYear()})</h3>
+                                                       </div>
+                                                  </div>
+                                             </a>`;
                                         resultsContainer.append(movieCard);
                                    });
-                                   resultsContainer.append('<a href="search_results.php?query=' + query + '" class="block text-center text-blue-500 p-3 hover:bg-gray-200">See All</a>');
+                                   resultsContainer.append('<a href="movies_by_search.php?query=' + query + '" class="block text-center text-blue-500 p-3 hover:bg-gray-200">See All</a>');
                               }
                               resultsContainer.removeClass('hidden');
                          },
@@ -63,7 +60,7 @@
                event.preventDefault();
                var query = $('#movie-search').val();
                if (query.length > 0) {
-                    window.location.href = 'search_results.php?query=' + query;
+                    window.location.href = 'movies_by_search.php?query=' + query;
                }
           });
      });

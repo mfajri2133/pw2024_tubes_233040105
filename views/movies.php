@@ -18,7 +18,7 @@ $total_pages = ceil($total_movies / $limit);
 
 <section class="bg-[#181a1b] p-6 min-h-screen">
      <div class="container mx-auto">
-          <h1 class="text-white text-4xl mb-5 font-semibold text-center">All Movie Collection</h1>
+          <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-3xl sm:text-2xl poppins text-center">All Movie Collection</h1>
 
           <div class="grid sm:grid-cols-2 grid-cols-6 md:grid-cols-4 gap-6 sm:gap-4 mb-5">
                <?php if (!empty($movies)) : ?>

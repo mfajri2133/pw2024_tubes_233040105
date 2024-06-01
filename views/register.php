@@ -79,6 +79,8 @@ if (login_check()) {
                <p class="mt-4 text-sm text-gray-600 text-center">Already have an account? <a href="login.php" class="text-indigo-600 hover:text-indigo-500">Sign in</a></p>
           </div>
      </div>
+
+     <?php include_once 'components/footer.php' ?>
 </body>
 
 
