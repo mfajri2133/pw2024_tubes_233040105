@@ -38,7 +38,7 @@ if (!$category) {
                          </a>
                     <?php endforeach; ?>
                <?php else : ?>
-                    <p class="text-white col-span-6 text-center  text-xl">No movies found.</p>
+                    <p class="text-white col-span-full text-center text-2xl font-extrabold tracking-tight leading-none md:text-1xl sm:text-xl poppins">No movies found.</p>
                <?php endif; ?>
           </div>
      </div>

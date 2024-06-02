@@ -29,7 +29,7 @@ $movies = getMoviesByYear($year);
                          </a>
                     <?php endforeach; ?>
                <?php else : ?>
-                    <p class="text-white col-span-full">No movies found for the year <?= htmlspecialchars($year) ?>.</p>
+                    <p class="text-white col-span-full text-center text-2xl font-extrabold tracking-tight leading-none md:text-1xl sm:text-xl poppins">No movies found for the year <?= htmlspecialchars($year) ?>.</p>
                <?php endif; ?>
           </div>
      </div>

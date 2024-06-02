@@ -43,12 +43,7 @@ $trailer_url = convertToEmbedURL($movie['trailer_url']);
                               <a href="#" id="copyLinkButton" class="block px-4 py-2 hover:bg-gray-100 ">Copy to clipboard</a>
                          </li>
                          <li>
-                              <?php if (!login_check()) : ?>
-                                   <?php $_SESSION['error'] = 'Please login to use the feature.'; ?>
-                                   <a href="<?= base_url('/views/login.php') ?>" class="block px-4 py-2 hover:bg-gray-100">Convert to PDF</a>
-                              <?php else : ?>
-                                   <a href="../pdf/generate_movie_pdf.php?id=<?= $movie['id'] ?>" class="block px-4 py-2 hover:bg-gray-100">Convert to PDF</a>
-                              <?php endif; ?>
+                              <a href="../pdf/generate_movie_pdf.php?id=<?= $movie['id'] ?>" class="block px-4 py-2 hover:bg-gray-100">Convert to PDF</a>
                          </li>
                     </ul>
                </div>
@@ -92,7 +87,7 @@ $trailer_url = convertToEmbedURL($movie['trailer_url']);
      </div>
 </section>
 
-<section class="bg-[#181a1b] p-4">
+<section class="bg-[#181a1b] p-4 py-24">
      <div class="container mx-auto">
           <div class="flex justify-between items-center mb-4">
                <h2 class="text-2xl sm:text-lg font-bold text-white">Same Movie Category</h2>
@@ -117,7 +112,7 @@ $trailer_url = convertToEmbedURL($movie['trailer_url']);
                          </a>
                     <?php endforeach; ?>
                <?php else : ?>
-                    <p class="text-white col-span-6 sm:col-span-2 md:col-span-3">No movies found.</p>
+                    <p class="text-white col-span-full text-center text-2xl font-extrabold tracking-tight leading-none md:text-1xl sm:text-xl poppins">No movies found.</p>
                <?php endif; ?>
           </div>
      </div>
