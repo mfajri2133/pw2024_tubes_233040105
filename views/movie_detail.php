@@ -2,20 +2,6 @@
 include_once '../lib/general.php';
 include_once '../helpers/users.php';
 
-
-include_once '../helpers/users.php';
-
-// Cek apakah sesi telah dimulai
-if (session_status() == PHP_SESSION_NONE) {
-     session_start();
-}
-
-// Redirect ke halaman login jika pengguna belum login
-if (!isset($_SESSION['user'])) {
-     redirect_to("login");
-     exit();
-}
-
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 $movie = getMovieById($id);
 $related_movies = getRelatedMovies(explode(', ', $movie['categories']), $id);
@@ -57,7 +43,12 @@ $trailer_url = convertToEmbedURL($movie['trailer_url']);
                               <a href="#" id="copyLinkButton" class="block px-4 py-2 hover:bg-gray-100 ">Copy to clipboard</a>
                          </li>
                          <li>
-                              <a href="../pdf/generate_movie_pdf.php?id=<?= $movie['id'] ?>" class="block px-4 py-2 hover:bg-gray-100">Convert to PDF</a>
+                              <?php if (!login_check()) : ?>
+                                   <?php $_SESSION['error'] = 'Please login to use the feature.'; ?>
+                                   <a href="<?= base_url('/views/login.php') ?>" class="block px-4 py-2 hover:bg-gray-100">Convert to PDF</a>
+                              <?php else : ?>
+                                   <a href="../pdf/generate_movie_pdf.php?id=<?= $movie['id'] ?>" class="block px-4 py-2 hover:bg-gray-100">Convert to PDF</a>
+                              <?php endif; ?>
                          </li>
                     </ul>
                </div>
