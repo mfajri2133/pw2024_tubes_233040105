@@ -5,7 +5,7 @@
           </a>
 
           <div class="flex items-center content-center space-x-3 md:order-2 xl:order-2 lg:order-2 rtl:space-x-reverse">
-               <div class="uppercase text-white font-medium text-sm poppins">
+               <div class="uppercase text-white font-medium text-sm poppins sm:hidden">
                     <a href="<?= base_url('/views/movies.php') ?>" class=" tracking-widest mx-3 sm:hidden ">All Movies</a>
                     <a href="<?= base_url('/views/categories.php') ?>" class=" mx-3 tracking-widest sm:hidden ">Categories</a>
                     <a href="<?= base_url('/views/years.php') ?>" class=" mx-3 tracking-widest sm:hidden ">Years</a>
@@ -13,7 +13,7 @@
 
                <?php if (login_check()) : ?>
                     <div class="flex items-center ms-3">
-                         <button type="button" class="flex text-sm" data-dropdown-toggle="dropdown-user" aria-expanded="false">
+                         <button type="button" class="flex text-sm" data-dropdown-toggle="dropdown-user" data-dropdown-offset-skidding="100" data-dropdown-placement="left" aria-expanded="false">
                               <div class="">
                                    <span class="sr-only">Open user menu</span>
                                    <?php if (isset($_SESSION['user']['img_profile_path']) && !empty($_SESSION['user']['img_profile_path'])) : ?>
@@ -54,7 +54,7 @@
                <?php else : ?>
                     <a href="<?= base_url("/views/login.php") ?>" class="text-white  font-medium text-sm ms-3 tracking-widest uppercase poppins">Sign In</a>
                <?php endif; ?>
-               <button data-collapse-toggle="navbar-sticky" type="button" class="w-10 h-10 flex items-center justify-center text-sm text-gray-500 hidden sm:flex" aria-controls="navbar-sticky" aria-expanded="false">
+               <button data-collapse-toggle="navbar-sticky" type="button" class="h-10 items-center justify-center text-sm text-gray-500 hidden sm:flex" aria-controls="navbar-sticky" aria-expanded="false">
                     <span class="sr-only">Open main menu</span>
                     <div class="flex items-center justify-center w-full h-full">
                          <i class="fa-solid fa-bars-staggered text-[#007bff]"></i>

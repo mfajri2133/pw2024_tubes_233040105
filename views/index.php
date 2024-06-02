@@ -27,10 +27,79 @@ $movies = getMovies($current_page);
 </section>
 
 
+<section class="carousel-height w-full">
+     <div id="default-carousel" class="relative w-full h-full" data-carousel="slide">
+          <!-- Carousel wrapper -->
+          <div class="relative w-full h-full overflow-hidden">
+               <!-- Item 1 -->
+               <div class="hidden duration-700 ease-in-out h-full" data-carousel-item>
+                    <img src="../uploads/carousel-img-1.webp" class="absolute block w-full h-full object-cover" alt="...">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                         <h2 class="text-white sm:text-2xl text=center text-4xl font-bold">Welcome to FMovie</h2>
+                    </div>
+               </div>
+               <!-- Item 2 -->
+               <div class="hidden duration-700 ease-in-out h-full" data-carousel-item>
+                    <img src="../uploads/carousel-img-2.webp" class="absolute block w-full h-full object-cover" alt="...">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                         <h2 class="text-white sm:text-2xl text=center text-4xl font-bold">Find the Latest Blockbusters</h2>
+                    </div>
+               </div>
+               <!-- Item 3 -->
+               <div class="hidden duration-700 ease-in-out h-full" data-carousel-item>
+                    <img src="../uploads/carousel-img-3.webp" class="absolute block w-full h-full object-cover" alt="...">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                         <h2 class="text-white sm:text-2xl text=center text-4xl font-bold">Hidden Gems Just for You</h2>
+                    </div>
+               </div>
+               <!-- Item 4 -->
+               <div class="hidden duration-700 ease-in-out h-full" data-carousel-item>
+                    <img src="../uploads/carousel-img-4.webp" class="absolute block w-full h-full object-cover" alt="...">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                         <h2 class="text-white sm:text-2xl text=center text-4xl font-bold">Timeless Classics Await</h2>
+                    </div>
+               </div>
+               <!-- Item 5 -->
+               <div class="hidden duration-700 ease-in-out h-full" data-carousel-item>
+                    <img src="../uploads/carousel-img-5.webp" class="absolute block w-full h-full object-cover" alt="...">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                         <h2 class="text-white sm:text-2xl text=center text-4xl font-bold">Join the Movie Magic at FMovie</h2>
+                    </div>
+               </div>
+          </div>
+          <!-- Slider indicators -->
+          <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+               <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+               <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+               <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+               <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
+               <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
+          </div>
+          <!-- Slider controls -->
+          <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+               <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                    <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4" />
+                    </svg>
+                    <span class="sr-only">Previous</span>
+               </span>
+          </button>
+          <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+               <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                    <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+                    </svg>
+                    <span class="sr-only">Next</span>
+               </span>
+          </button>
+     </div>
+</section>
+
+
 <section class="h-auto bg-[#007bff] md:h-auto sm:h-auto relative overflow-hidden">
-     <div class="p-[50px] sm:px-[16px] sm:py-[28px] flex place-content-center  max-w-[1440px] mx-auto md:pt-[64px] md:pb-[80px] md:px-[40px]">
+     <div class="p-[50px] sm:px-[16px] sm:py-[28px]   max-w-[1440px] mx-auto md:pt-[64px] md:pb-[80px] md:px-[40px]">
           <div class="poppins text-[32px] sm:text-[16px] md:text-[28px] font-medium text-white text-center whitespace-pre-wrap">
-               <p>Designed as the ultimate platform for movie enthusiasts, FWeb Movie offers a wide variety of films to explore and enjoy. From the latest blockbusters to timeless classics and hidden gems, we have something for everyone. Immerse yourself in the world of cinema and experience the magic of movies with FMovie.<br></p>
+               <p>Designed as the ultimate platform for movie buffs, FMovie offers a wide variety of movies to explore and enjoy. From the latest blockbusters to timeless classics and hidden gems, we have something for everyone. Immerse yourself in the world of cinema and experience the magic of movies with FMovie.</p>
           </div>
      </div>
 </section>

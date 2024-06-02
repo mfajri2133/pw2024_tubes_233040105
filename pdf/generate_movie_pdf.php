@@ -48,7 +48,7 @@ $html = '
                     <td>' . htmlspecialchars($movie['director']) . '</td>
                     <td>' . htmlspecialchars($movie['producer']) . '</td>
                </tr>
-               <tr>
+               <tr style="background-color: #eef7ff">
                     <th colspan="4">Synopsis</th>
                </tr>
                <tr>

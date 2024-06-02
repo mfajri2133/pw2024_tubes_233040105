@@ -3,7 +3,7 @@ include_once '../controller/toast_handler.php';
 $error_message = get_error_message();
 if ($error_message) :
 ?>
-     <div id="toast-undo" class="flex z-30  transition-all duration-300 items-center w-full max-w-xs p-4 text-white bg-red-500 rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 fixed bottom-[-50px] right-5" role="alert">
+     <div id="toast-undo" class="flex z-40  transition-all duration-300 items-center w-full max-w-xs p-4 text-white bg-red-500 rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 fixed bottom-[-50px] right-5" role="alert">
           <div class=" mr-2  rounded-full border  p-1  inline-flex items-center justify-center h-8 w-8  dark:text-gray-500  dark:bg-gray-800 ">
                <i class="text-white fa-solid fa-xmark"></i>
           </div>

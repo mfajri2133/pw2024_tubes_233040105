@@ -22,7 +22,7 @@ $categories = getCategories();
           <div class="grid sm:grid-cols-1 md:grid-cols-3 grid-cols-6 gap-6">
                <?php if (!empty($categories)) : ?>
                     <?php foreach ($categories as $category) : ?>
-                         <a href="movies_by_category.php?id=<?= $category['id'] ?>" class="block bg-white text-center py-4 px-6 rounded-lg shadow-md text-lg font-bold text-[#007bff] hover:bg-[#0056b3] hover:text-white">
+                         <a href="movies_by_category.php?id=<?= $category['id'] ?>" class="block bg-white text-center py-4 px-6 rounded-lg shadow-md text-lg font-bold text-[#007bff] ">
                               <?= htmlspecialchars($category['name']) ?>
                          </a>
                     <?php endforeach; ?>

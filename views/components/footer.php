@@ -1,6 +1,6 @@
 <footer class="sm:p-4 bg-[#181a1b] md:p-8 p-10 border-t border-gray-500">
      <div class="text-center">
-          <a href="<?= base_url("/views/index.php") ?>" class="">
+          <a href="<?= base_url("/views/index.php") ?>">
                <span class="self-center text-3xl font-bold dark:text-white text-[#007bff] mochiy">F<span class="text-white karla">Movie</span></span>
           </a>
           <p class="my-4 text-gray-300 karla font-extralight tracking-wide">Explore our collection of Movie to find your next favorite movie.</p>
@@ -8,12 +8,15 @@
      <div>
           <ul class="flex flex-wrap gap-4 justify-center items-center mb-6 poppins uppercase text-white tracking-widest font-medium">
                <li>
-                    <a href="#" class="">All movie</a>
+                    <a href="<?= base_url('/views/movies.php') ?>">All movie</a>
                </li>
                <li>
-                    <a href="#" class="">Categories</a>
+                    <a href="<?= base_url('/views/categories.php') ?>">Categories</a>
+               </li>
+               <li>
+                    <a href="<?= base_url('/views/years.php') ?>">Years</a>
                </li>
           </ul>
      </div>
-     <div class="text-sm text-gray-500 text-center ">© 2024 <a href="#" class="hover:underline">FMovie</a>. All Rights Reserved.</div>
+     <div class="text-sm text-gray-500 text-center ">© 2024 <a href="<?= base_url('/views/index.php') ?>" class="hover:underline">FMovie</a>. All Rights Reserved.</div>
 </footer>

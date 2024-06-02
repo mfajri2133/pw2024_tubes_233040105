@@ -23,3 +23,15 @@ body::-webkit-scrollbar {
 .mochiy {
      font-family: "Mochiy Pop One", sans-serif;
 }
+
+@media (max-width: 767px) {
+     .carousel-height {
+          height: calc(100vh - 120px);
+     }
+}
+
+@media (min-width: 768px) {
+     .carousel-height {
+          height: calc(100vh - 72px);
+     }
+}
