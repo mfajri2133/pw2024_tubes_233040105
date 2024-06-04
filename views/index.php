@@ -26,42 +26,34 @@ $movies = getMovies($current_page);
      </div>
 </section>
 
-
 <section class="carousel-height w-full">
      <div id="default-carousel" class="relative w-full h-full" data-carousel="slide">
           <!-- Carousel wrapper -->
           <div class="relative w-full h-full overflow-hidden">
                <!-- Item 1 -->
                <div class="hidden duration-700 ease-in-out h-full" data-carousel-item>
-                    <img src="../uploads/carousel-img-1.webp" class="absolute block w-full h-full object-cover" alt="...">
+                    <img src="../uploads/carousel-1.webp" class="absolute block w-full h-full object-cover" alt="...">
                     <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
                          <h2 class="text-white sm:text-2xl text=center text-4xl font-bold">Welcome to FMovie</h2>
                     </div>
                </div>
                <!-- Item 2 -->
                <div class="hidden duration-700 ease-in-out h-full" data-carousel-item>
-                    <img src="../uploads/carousel-img-2.webp" class="absolute block w-full h-full object-cover" alt="...">
+                    <img src="../uploads/carousel-2.webp" class="absolute block w-full h-full object-cover" alt="...">
                     <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
                          <h2 class="text-white sm:text-2xl text=center text-4xl font-bold">Find the Latest Blockbusters</h2>
                     </div>
                </div>
                <!-- Item 3 -->
                <div class="hidden duration-700 ease-in-out h-full" data-carousel-item>
-                    <img src="../uploads/carousel-img-3.webp" class="absolute block w-full h-full object-cover" alt="...">
+                    <img src="../uploads/carousel-3.webp" class="absolute block w-full h-full object-cover" alt="...">
                     <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
                          <h2 class="text-white sm:text-2xl text=center text-4xl font-bold">Hidden Gems Just for You</h2>
                     </div>
                </div>
                <!-- Item 4 -->
                <div class="hidden duration-700 ease-in-out h-full" data-carousel-item>
-                    <img src="../uploads/carousel-img-4.webp" class="absolute block w-full h-full object-cover" alt="...">
-                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-                         <h2 class="text-white sm:text-2xl text=center text-4xl font-bold">Timeless Classics Await</h2>
-                    </div>
-               </div>
-               <!-- Item 5 -->
-               <div class="hidden duration-700 ease-in-out h-full" data-carousel-item>
-                    <img src="../uploads/carousel-img-5.webp" class="absolute block w-full h-full object-cover" alt="...">
+                    <img src="../uploads/carousel-4.webp" class="absolute block w-full h-full object-cover" alt="...">
                     <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
                          <h2 class="text-white sm:text-2xl text=center text-4xl font-bold">Join the Movie Magic at FMovie</h2>
                     </div>
@@ -73,7 +65,6 @@ $movies = getMovies($current_page);
                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
-               <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
           </div>
           <!-- Slider controls -->
           <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
