@@ -108,10 +108,10 @@ function update_movie()
 
           $release_date = date('Y-m-d', strtotime($release_date));
 
-          // Fetch current poster path
+          // Ambil path poster film
           $poster_path = get_movie_poster($id);
 
-          // Check if a new poster is uploaded
+          // Cek apakah ada file poster yang diupload
           if (isset($_FILES['poster_path']) && $_FILES['poster_path']['error'] === 0) {
                $new_poster_path = uploadPoster($id);
                if ($new_poster_path === false) {
@@ -119,7 +119,8 @@ function update_movie()
                     redirect_to("movie");
                     exit();
                }
-               $poster_path = $new_poster_path; // Update poster path if new poster uploaded
+               // Hapus poster lama jika berhasil upload poster baru
+               $poster_path = $new_poster_path;
           }
 
           // Update movie details
@@ -127,10 +128,10 @@ function update_movie()
 
           // Update categories
           if (isset($_POST['categories']) && is_array($_POST['categories'])) {
-               // Remove existing categories
+               // Hapus semua kategori film yang ada
                deleteMovieCategories($id);
 
-               // Add new categories
+               // Tambah kategori film yang baru
                foreach ($_POST['categories'] as $category_id) {
                     saveMovieCategory($id, $category_id);
                }
@@ -185,8 +186,18 @@ function delete_movie()
 {
      if (isset($_POST['id'])) {
           $id = $_POST['id'];
+          $poster_path = get_movie_poster($id); // Ambil path poster film
+
           $result = destroy_movie($id);
           if ($result === true) {
+               // Hapus direktori poster jika film berhasil dihapus
+               if ($poster_path) {
+                    $poster_dir = dirname('..' . $poster_path);
+                    if (is_dir($poster_dir)) {
+                         array_map('unlink', glob("$poster_dir/*.*"));
+                         rmdir($poster_dir);
+                    }
+               }
                $_SESSION['success_message'] = "Movie deleted successfully.";
                redirect_to("movie");
                exit();

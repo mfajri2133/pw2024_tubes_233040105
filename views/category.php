@@ -151,7 +151,7 @@ $categories = fetchCategories();
                          </button>
                     </div>
                     <!-- Modal body -->
-                    <form method="POST" action="../controller/category.php?action=create" class="m-0">
+                    <form method="POST" action="../controller/category.php?action=create" class="m-0" id="add-category-form">
                          <div class="p-5">
                               <div class="mb-4">
                                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category Name</label>
@@ -167,13 +167,29 @@ $categories = fetchCategories();
                </div>
           </div>
      </div>
-
 </div>
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="<?= base_url('/js/search-category-ajax.js') ?>"></script>
 <script src="<?= base_url('/js/modal.js') ?>"></script>
+<script>
+     // Javascript untuk menonaktifkan tombol submit setelah diklik
+     document.addEventListener("DOMContentLoaded", function() {
+          // Ambil form dan tombol submit
+          const form = document.querySelector("#add-category-form");
+          const submitButton = form.querySelector("#submit-button");
+
+          // Tambahkan event listener ketika form di submit
+          form.addEventListener("submit", function(event) {
+               // Nonaktifkan tombol submit
+               submitButton.disabled = true;
+
+               // Ganti text tombol submit
+               submitButton.innerHTML = 'Saving...';
+          });
+     });
+</script>
 
 
 

@@ -246,7 +246,7 @@ $categories = fetchCategories();
                     </button>
                </div>
                <!-- Modal body -->
-               <form method="POST" action="../controller/movie.php?action=create" class="m-0" enctype="multipart/form-data">
+               <form method="POST" action="../controller/movie.php?action=create" class="m-0" enctype="multipart/form-data" id="add-movie-form">
                     <div class="p-5">
                          <div class="grid grid-cols-3 sm:grid-cols-2 gap-2 mb-4">
                               <div>
@@ -308,7 +308,7 @@ $categories = fetchCategories();
                          </div>
 
                          <div class="flex justify-end">
-                              <button type=" submit" id="submit-button" class="text-white items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                              <button type="submit" id="submit-button" class="text-white items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                    Save
                               </button>
                          </div>
@@ -325,6 +325,20 @@ $categories = fetchCategories();
 <script src="../node_modules/flowbite/dist/datepicker.js"></script>
 <script src="<?= base_url('/js/modal.js') ?>"></script>
 <script>
+     // Ketika halaman sudah di-load
+     document.addEventListener("DOMContentLoaded", function() {
+          // Ambil form dan tombol submit
+          const form = document.querySelector("#add-movie-form");
+          const submitButton = form.querySelector("#submit-button");
+
+          // Ketika form di-submit
+          form.addEventListener("submit", function(event) {
+               // disable tombol submit dan ganti textnya
+               submitButton.disabled = true;
+               submitButton.innerHTML = 'Saving...';
+          });
+     });
+
      const formatDate = (dateString) => {
           const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
           const date = new Date(dateString);
