@@ -45,7 +45,7 @@ function add_admin($name, $username)
      $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
      // SQL untuk menambahkan user admin
-     $sql = "INSERT INTO users (name, username, password, is_admin, is_active) VALUES (?, ?, ?, 1, 1)";
+     $sql = "INSERT INTO users (name, username, password, is_admin, is_active, is_new) VALUES (?, ?, ?, 1, 1, 1)";
 
      // Mengeksekusi query
      if ($stmt = $conn->prepare($sql)) {

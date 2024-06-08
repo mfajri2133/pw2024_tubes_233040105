@@ -113,8 +113,8 @@
 
 
 
-<script src=<?= base_url('/js//password-toggle-hide.js') ?>></script>
-<script src=<?= base_url('/js/profile.js') ?>></script>
+<script src=<?= base_url('/js/password.js') ?>></script>
+
 
 
 <?php include_once 'components/layout-bottom.php' ?>

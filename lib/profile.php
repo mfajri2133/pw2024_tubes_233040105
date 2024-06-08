@@ -75,10 +75,19 @@ function update_user_password($user_id, $new_password)
      $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
 
      // SQL untuk mengubah password user
-     $sql = "UPDATE users SET password = ? WHERE id = ?";
+     $sql = "UPDATE users SET password = ?, is_new = 0 WHERE id = ?";
      // Mengeksekusi query
      $stmt = $conn->prepare($sql);
-     return $stmt->execute([$hashed_password, $user_id]);
+     // Mengikat parameter dan mengeksekusi query
+     if ($stmt->execute([$hashed_password, $user_id])) {
+          // Mengambil data pengguna yang diperbarui
+          $user = get_user($user_id);
+          // Mengupdate session pengguna
+          $_SESSION['user'] = $user;
+          return true;
+     } else {
+          return false;
+     }
 }
 
 // Verifikasi password lama untuk melakukan ganti password

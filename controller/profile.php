@@ -132,9 +132,8 @@ function change_password()
           // Ambil data yang dikirimkan melalui form
           $old_password = htmlspecialchars($_POST['password']);
           $new_password = htmlspecialchars($_POST['new_password']);
-
-          // Periksa apakah password lama benar
           $user_id = $_SESSION['user']['id'];
+          // Periksa apakah password lama benar
           if (!verify_old_password($user_id, $old_password)) {
                // Jika password lama salah, tampilkan pesan error
                $_SESSION['error'] = "Invalid old password.";

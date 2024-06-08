@@ -68,7 +68,7 @@ if (login_check()) {
 
 </body>
 
-<script src=<?= base_url("/js/password-toggle-hide.js") ?>></script>
+<script src=<?= base_url("/js/password.js") ?>></script>
 <script src=<?= base_url("/js/fontawesome-loader.js") ?>></script>
 <script src=<?= base_url("/node_modules/flowbite/dist/flowbite.min.js") ?>></script>
 

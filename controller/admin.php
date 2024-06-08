@@ -1,6 +1,7 @@
 <?php
 include_once '../helpers/users.php';
 include_once '../lib/general.php';
+include_once '../lib/profile.php';
 include_once '../lib/admin.php';
 include_once '../mailer/preparation_mailer.php';
 include_once '../mailer/add_admin_mailer.php';
@@ -23,6 +24,10 @@ switch ($_SERVER['REQUEST_METHOD']) {
                case 'delete':
                     // Panggil fungsi delete_admin
                     delete_admin();
+                    break;
+               case 'change_default_password':
+                    // Panggil fungsi change_default_password
+                    change_default_password();
                     break;
                default:
                     redirect_to("admin");
@@ -102,6 +107,33 @@ function create_admin()
           $_SESSION['error'] = "Name and username are required.";
      }
      redirect_to("admin");
+     exit();
+}
+
+// Fungsi untuk mengubah password default
+function change_default_password()
+{
+     // Jika ada data password yang dikirim dari form
+     if (isset($_POST['password'])) {
+          // Simpan data password ke dalam variabel
+          $password = htmlspecialchars($_POST['password']);
+          // Simpan data user_id ke dalam variabel
+          $user_id = $_SESSION['user']['id'];
+
+          // Panggil fungsi change_password dan kirimkan password
+          $result = update_user_password($user_id, $password);
+          // Cek apakah password berhasil diubah
+          if ($result === true) {
+               $_SESSION['success_message'] = "Password changed successfully.";
+               redirect_to("dashboard");
+               exit();
+          } else {
+               $_SESSION['error'] = "Failed to change password. Please try again.";
+          }
+     } else {
+          $_SESSION['error'] = "Password is required.";
+     }
+     redirect_to("dashboard");
      exit();
 }
 
