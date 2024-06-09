@@ -43,7 +43,11 @@ $trailer_url = convertToEmbedURL($movie['trailer_url']);
                               <a href="#" id="copyLinkButton" class="block px-4 py-2 hover:bg-gray-100 ">Copy to clipboard</a>
                          </li>
                          <li>
-                              <a href="../pdf/generate_movie_pdf.php?id=<?= $movie['id'] ?>" class="block px-4 py-2 hover:bg-gray-100">Convert to PDF</a>
+                              <?php if (!login_check()) : ?>
+                                   <a href="<?= base_url('/views/login.php') ?>" class="block px-4 py-2 hover:bg-gray-100">Convert to PDF</a>
+                              <?php else : ?>
+                                   <a href="../pdf/generate_movie_pdf.php?id=<?= $movie['id'] ?>" class="block px-4 py-2 hover:bg-gray-100">Convert to PDF</a>
+                              <?php endif; ?>
                          </li>
                     </ul>
                </div>
