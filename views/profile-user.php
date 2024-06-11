@@ -46,7 +46,7 @@ include_once 'components/layout-user-top.php';
                               </div>
                               <div class="mb-4">
                                    <label for="img_profile_path" class="block mb-2 text-sm font-medium text-white dark:text-white">Profile Image</label>
-                                   <input id="img_profile_path" name="img_profile_path" type="file" accept=".jpg, .jpeg" class="block w-full file:!text-xs file:!bg-blue-400 text-xs text-gray-500 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 " aria-describedby="file_input_help">
+                                   <input id="img_profile_path" name="img_profile_path" type="file" accept=".jpg, .jpeg, .png" class="block w-full file:!text-xs file:!bg-blue-400 text-xs text-gray-500 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 " aria-describedby="file_input_help">
                                    <p class="mt-1 text-xs text-red-600 dark:text-gray-300" id="file_input_help">JPEG, PNG or JPG (MAX 5MB).</p>
                               </div>
                               <p id="error" class="text-xs text-red-600"></p>
